@@ -137,10 +137,52 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="planos" className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
-        <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Planos</p><h2 className="mt-3 text-3xl font-black sm:text-4xl">Escolha a estrutura para sua operação.</h2><p className="mx-auto mt-4 max-w-2xl text-slate-600">Valores apresentados como referência comercial. A cobrança dos planos será conectada ao fluxo de assinatura.</p></div>
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {plans.map(plan=><div key={plan.name} className={plan.featured ? "relative rounded-3xl border-2 border-blue-600 bg-white p-7 shadow-2xl shadow-blue-100" : "rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"}>{plan.featured && <div className="absolute -top-3 left-6 rounded-full bg-blue-600 px-3 py-1 text-xs font-black text-white">Mais completo</div>}<h3 className="text-xl font-black">{plan.name}</h3><p className="mt-2 min-h-12 text-sm text-slate-500">{plan.description}</p><div className="mt-5"><span className="text-4xl font-black">R$ {plan.price}</span><span className="text-sm text-slate-500">/mês</span></div><Link href="/cadastro" className={plan.featured ? "mt-6 flex justify-center rounded-xl bg-blue-600 px-4 py-3 font-extrabold text-white hover:bg-blue-700" : "mt-6 flex justify-center rounded-xl border border-slate-200 px-4 py-3 font-extrabold text-slate-800 hover:bg-slate-50"}>Começar agora</Link><ul className="mt-6 space-y-3">{plan.items.map(item=><li key={item} className="flex gap-2 text-sm text-slate-600"><Check size={17} className="mt-0.5 shrink-0 text-emerald-500"/>{item}</li>)}</ul></div>)}
+      <section id="planos" className="bg-slate-50">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
+          <div className="text-center">
+            <p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Planos</p>
+            <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Escolha o plano ideal para sua operação.</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-slate-600">Comece com 3 dias de teste e evolua conforme sua carteira de clientes e sua equipe crescerem.</p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            {plans.map((plan) => (
+              <div key={plan.name} className={plan.featured ? "relative flex flex-col rounded-3xl border-2 border-blue-600 bg-white p-6 shadow-2xl shadow-blue-100" : "relative flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"}>
+                {plan.badge && (
+                  <div className={plan.featured ? "absolute -top-3 left-5 rounded-full bg-blue-600 px-3 py-1 text-xs font-black text-white" : "absolute -top-3 left-5 rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700"}>
+                    {plan.badge}
+                  </div>
+                )}
+                <h3 className="mt-2 text-xl font-black text-slate-950">{plan.name}</h3>
+                <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-500">{plan.description}</p>
+                <div className="mt-5 min-h-[54px]">
+                  {plan.price === "0" ? (
+                    <><span className="text-4xl font-black text-slate-950">Grátis</span><span className="ml-2 text-sm font-semibold text-slate-500">{plan.period}</span></>
+                  ) : plan.price === "Personalizado" ? (
+                    <span className="text-2xl font-black text-slate-950">Personalizado</span>
+                  ) : (
+                    <><span className="text-4xl font-black text-slate-950">R$ {plan.price}</span><span className="text-sm text-slate-500">{plan.period}</span></>
+                  )}
+                </div>
+                <Link href="/cadastro" className={plan.featured ? "mt-6 flex justify-center rounded-xl bg-blue-600 px-4 py-3 font-extrabold text-white hover:bg-blue-700" : "mt-6 flex justify-center rounded-xl border border-slate-200 px-4 py-3 font-extrabold text-slate-800 hover:bg-slate-50"}>
+                  {plan.name === "Teste Grátis" ? "Começar teste" : "Começar agora"}
+                </Link>
+                <ul className="mt-6 space-y-3">
+                  {plan.items.map((item) => (
+                    <li key={item} className="flex gap-2 text-sm leading-5 text-slate-600">
+                      <Check size={17} className="mt-0.5 shrink-0 text-emerald-500" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-blue-100 bg-white p-5 text-center shadow-sm">
+            <p className="font-bold text-slate-800">Período de teste: 3 dias</p>
+            <p className="mt-1 text-sm leading-6 text-slate-500">Durante o teste, a conta fica limitada a 1 cliente e 1 número de WhatsApp. Após o período, o acesso aguarda a ativação de um plano.</p>
+          </div>
         </div>
       </section>
 
