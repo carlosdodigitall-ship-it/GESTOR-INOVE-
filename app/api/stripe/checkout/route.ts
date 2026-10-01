@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe/server";
+import { getStripe } from "@/lib/stripe/server";
 import { createClient } from "@/lib/supabase/server";
 
 const PRICE_BY_PLAN: Record<string, string | undefined> = {
@@ -9,6 +9,7 @@ const PRICE_BY_PLAN: Record<string, string | undefined> = {
 
 export async function POST(request: Request) {
   try {
+    const stripe = getStripe();
     const body = await request.json();
     const planCode = String(body?.planCode || "");
     const priceId = PRICE_BY_PLAN[planCode];
