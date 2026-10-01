@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 "use client";
 import {FormEvent,useEffect,useState} from "react";
 import {Lightbulb,Send,Loader2,CheckCircle2} from "lucide-react";
