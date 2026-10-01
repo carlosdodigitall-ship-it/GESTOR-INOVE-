@@ -1,0 +1,2 @@
+import { ShieldCheck } from "lucide-react";
+export function Logo(){return <div className="flex items-center gap-2"><div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white"><ShieldCheck size={23}/></div><div><div className="text-lg font-extrabold">Gestor <span className="text-blue-600">I9</span></div><div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Cobranças & Financeiro</div></div></div>}
