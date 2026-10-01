@@ -1,1 +1,9 @@
-import Stripe from "stripe";export const stripe=new Stripe(process.env.STRIPE_SECRET_KEY||"",{apiVersion:"2026-09-30.clover"});
+import Stripe from "stripe";
+
+const secretKey = process.env.STRIPE_SECRET_KEY;
+
+if (!secretKey) throw new Error("STRIPE_SECRET_KEY is not configured.");
+
+export const stripe = new Stripe(secretKey, {
+  apiVersion: "2026-08-26.dahlia",
+});
