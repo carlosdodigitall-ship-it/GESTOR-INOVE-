@@ -1,0 +1,1 @@
+import {DashboardShell} from "@/components/dashboard-shell";export default function Page(){return <DashboardShell title="Recorrencias"><div className="rounded-2xl border bg-white p-6 shadow-sm"><h2 className="text-xl font-black">Recorrencias</h2><p className="mt-2 text-sm text-slate-500">Módulo preparado para integração com Supabase e dados reais.</p></div></DashboardShell>}
