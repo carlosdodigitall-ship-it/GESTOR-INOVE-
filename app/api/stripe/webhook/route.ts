@@ -88,13 +88,17 @@ export async function POST(request: Request) {
 
     if (event.type === "invoice.paid") {
       const invoice = event.data.object as Stripe.Invoice;
-      const subscriptionId = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
+      const subscriptionId = typeof (invoice as unknown as { subscription?: string | { id: string } | null }).subscription === "string"
+        ? (invoice as unknown as { subscription?: string | { id: string } | null }).subscription
+        : (invoice as unknown as { subscription?: string | { id: string } | null }).subscription?.id;
       if (subscriptionId) await supabase.from("subscriptions").update({ status: "active", updated_at: new Date().toISOString() }).eq("stripe_subscription_id", subscriptionId);
     }
 
     if (event.type === "invoice.payment_failed") {
       const invoice = event.data.object as Stripe.Invoice;
-      const subscriptionId = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
+      const subscriptionId = typeof (invoice as unknown as { subscription?: string | { id: string } | null }).subscription === "string"
+        ? (invoice as unknown as { subscription?: string | { id: string } | null }).subscription
+        : (invoice as unknown as { subscription?: string | { id: string } | null }).subscription?.id;
       if (subscriptionId) await supabase.from("subscriptions").update({ status: "past_due", updated_at: new Date().toISOString() }).eq("stripe_subscription_id", subscriptionId);
     }
 
