@@ -1,1 +1,51 @@
-import Link from "next/link";import {Logo} from "@/components/logo";export default function Login(){return <main className="grid min-h-screen place-items-center bg-slate-50 px-4"><div className="w-full max-w-md"><div className="mb-8 flex justify-center"><Logo/></div><div className="rounded-3xl border bg-white p-7 shadow-xl"><h1 className="text-2xl font-black">Entrar no Gestor I9</h1><p className="mt-2 text-sm text-slate-500">Acesse sua conta.</p><form className="mt-7 space-y-4"><label className="block text-sm font-semibold">E-mail<input type="email" required className="mt-2 w-full rounded-xl border px-4 py-3"/></label><label className="block text-sm font-semibold">Senha<input type="password" required className="mt-2 w-full rounded-xl border px-4 py-3"/></label><button className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white">Entrar</button></form><p className="mt-6 text-center text-sm text-slate-500">Não tem conta? <Link href="/cadastro" className="font-bold text-blue-600">Criar cadastro</Link></p></div></div></main>}
+"use client";
+
+import Link from "next/link";
+import { FormEvent, useState } from "react";
+import { Logo } from "@/components/logo";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+
+export default function Login() {
+  const router = useRouter();
+  const supabase = createClient();
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [error,setError] = useState("");
+  const [loading,setLoading] = useState(false);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      setError("E-mail ou senha inválidos.");
+      setLoading(false);
+      return;
+    }
+    router.replace("/dashboard");
+    router.refresh();
+  }
+
+  return <main className="grid min-h-screen place-items-center bg-slate-50 px-4">
+    <div className="w-full max-w-md">
+      <div className="mb-8 flex justify-center"><Logo/></div>
+      <div className="rounded-3xl border bg-white p-7 shadow-xl">
+        <h1 className="text-2xl font-black">Entrar no Gestor I9</h1>
+        <p className="mt-2 text-sm text-slate-500">Acesse sua conta.</p>
+        <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+          <label className="block text-sm font-semibold">E-mail
+            <input value={email} onChange={e=>setEmail(e.target.value)} type="email" required autoComplete="email" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-500"/>
+          </label>
+          <label className="block text-sm font-semibold">Senha
+            <input value={password} onChange={e=>setPassword(e.target.value)} type="password" required autoComplete="current-password" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-500"/>
+          </label>
+          {error && <p className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-600">{error}</p>}
+          <button disabled={loading} className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white disabled:opacity-60">{loading ? "Entrando..." : "Entrar"}</button>
+        </form>
+        <p className="mt-6 text-center text-sm text-slate-500">Não tem conta? <Link href="/cadastro" className="font-bold text-blue-600">Criar cadastro</Link></p>
+      </div>
+    </div>
+  </main>;
+}
