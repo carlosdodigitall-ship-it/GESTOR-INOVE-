@@ -12,9 +12,44 @@ const features = [
 ];
 
 const plans = [
-  { name: "Essencial", price: "29", description: "Para começar a organizar sua cobrança.", items: ["Clientes e cadastro", "Cobranças", "Dashboard financeiro", "Relatórios básicos"] },
-  { name: "Profissional", price: "59", description: "Para quem quer mais automação e controle.", featured: true, items: ["Tudo do Essencial", "Recorrências", "WhatsApp", "Relatórios avançados", "Mais recursos de gestão"] },
-  { name: "Empresarial", price: "99", description: "Para operações que precisam de uma gestão completa.", items: ["Tudo do Profissional", "Estrutura para equipes", "Mais automações", "Suporte prioritário"] },
+  {
+    name: "Teste Grátis",
+    price: "0",
+    period: "3 dias",
+    description: "Conheça o Gestor I9 antes de escolher seu plano.",
+    badge: "Comece grátis",
+    items: ["3 dias de acesso", "Até 1 cliente", "Até 1 WhatsApp", "Recursos principais da plataforma"],
+  },
+  {
+    name: "Mensal Essencial",
+    price: "20",
+    period: "/mês",
+    description: "Para começar com uma operação pequena e organizada.",
+    items: ["Até 3 clientes", "1 usuário", "1 WhatsApp", "Cobranças e recorrências", "Financeiro e relatórios"],
+  },
+  {
+    name: "Mensal Profissional",
+    price: "30",
+    period: "/mês",
+    description: "Para quem já possui uma carteira maior de clientes.",
+    featured: true,
+    badge: "Mais escolhido",
+    items: ["Até 50 clientes", "1 usuário", "1 WhatsApp", "Todos os recursos essenciais", "Relatórios e gestão completa"],
+  },
+  {
+    name: "Master",
+    price: "Personalizado",
+    period: "",
+    description: "Para operações maiores que precisam trabalhar com equipe.",
+    items: ["Clientes ilimitados", "Até 10 usuários", "1 WhatsApp", "Recursos completos", "Estrutura para equipe"],
+  },
+  {
+    name: "Anual",
+    price: "Personalizado",
+    period: "",
+    description: "Para quem prefere organizar a plataforma em um ciclo anual.",
+    items: ["Até 1.000 clientes", "1 usuário", "1 WhatsApp", "Recursos completos", "Cobrança anual"],
+  },
 ];
 
 export default function Home() {
