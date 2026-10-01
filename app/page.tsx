@@ -1,1 +1,130 @@
-import Link from "next/link";import {ArrowRight,CheckCircle2,ShieldCheck,Users,WalletCards,MessageCircle,BarChart3} from "lucide-react";import {Logo} from "@/components/logo";const features=[["Clientes","Organize clientes e histórico.",Users],["Cobranças","Controle vencimentos e pagamentos.",WalletCards],["WhatsApp","Prepare lembretes e automações.",MessageCircle],["Relatórios","Acompanhe seu desempenho financeiro.",BarChart3]] as const;export default function Home(){return <main><header className="border-b bg-white"><div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4"><Logo/><div className="flex gap-2"><Link href="/login" className="rounded-xl px-4 py-2 font-bold text-slate-600">Entrar</Link><Link href="/cadastro" className="rounded-xl bg-blue-600 px-4 py-2 font-bold text-white">Começar agora</Link></div></div></header><section className="bg-gradient-to-b from-white to-blue-50"><div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:items-center"><div><div className="mb-5 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700"><ShieldCheck size={15}/> Gestão financeira inteligente</div><h1 className="text-4xl font-black tracking-tight sm:text-6xl">Controle suas cobranças. <span className="text-blue-600">Receba no prazo.</span></h1><p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">Centralize clientes, cobranças, recorrências, financeiro e comunicação em uma plataforma profissional.</p><div className="mt-8 flex gap-3"><Link href="/cadastro" className="flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 font-bold text-white">Criar minha conta <ArrowRight size={18}/></Link><Link href="/login" className="rounded-xl border bg-white px-6 py-3.5 font-bold">Já tenho conta</Link></div><div className="mt-7 flex gap-4 text-xs font-semibold text-slate-500"><span><CheckCircle2 size={14} className="inline text-emerald-500"/> Multiempresa</span><span><CheckCircle2 size={14} className="inline text-emerald-500"/> Automação</span></div></div><div className="rounded-3xl border bg-white p-5 shadow-2xl"><p className="text-sm font-semibold text-slate-500">Visão geral</p><p className="text-2xl font-black">Seu financeiro</p><div className="mt-5 grid grid-cols-2 gap-3"><div className="rounded-xl bg-slate-50 p-4"><p className="text-xs text-slate-500">Recebido</p><p className="mt-2 text-xl font-black">R$ 18.450</p></div><div className="rounded-xl bg-slate-50 p-4"><p className="text-xs text-slate-500">Em aberto</p><p className="mt-2 text-xl font-black">R$ 7.280</p></div></div><div className="mt-3 flex h-40 items-end gap-2 rounded-xl bg-slate-50 p-4">{[35,55,42,70,60,82,74,95,78,88,100,91].map((h,i)=><div key={i} className="flex-1 rounded-t bg-blue-500" style={{height:h+"%"}}/>)}</div></div></div></div></section><section className="mx-auto max-w-7xl px-5 py-20"><h2 className="text-3xl font-black">Tudo em um só lugar.</h2><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{features.map(([title,text,Icon])=><div key={title} className="rounded-2xl border bg-white p-6 shadow-sm"><div className="mb-5 grid h-11 w-11 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon size={21}/></div><h3 className="font-extrabold">{title}</h3><p className="mt-2 text-sm text-slate-500">{text}</p></div>)}</div></section></main>}
+import Link from "next/link";
+import { ArrowRight, BarChart3, BellRing, Check, CheckCircle2, CreditCard, MessageCircle, ShieldCheck, Sparkles, Users, WalletCards } from "lucide-react";
+import { Logo } from "@/components/logo";
+
+const features = [
+  { title: "Clientes organizados", text: "Cadastre clientes, contatos e acompanhe todo o histórico.", icon: Users },
+  { title: "Cobranças sob controle", text: "Veja o que está pago, em aberto e vencido em poucos cliques.", icon: WalletCards },
+  { title: "Recorrências", text: "Estruture cobranças recorrentes e acompanhe cada ciclo.", icon: CreditCard },
+  { title: "WhatsApp", text: "Centralize sua operação de comunicação e lembretes.", icon: MessageCircle },
+  { title: "Relatórios", text: "Transforme seus dados financeiros em uma visão clara do negócio.", icon: BarChart3 },
+  { title: "Notificações", text: "Tenha uma visão rápida dos eventos que merecem sua atenção.", icon: BellRing },
+];
+
+const plans = [
+  { name: "Essencial", price: "29", description: "Para começar a organizar sua cobrança.", items: ["Clientes e cadastro", "Cobranças", "Dashboard financeiro", "Relatórios básicos"] },
+  { name: "Profissional", price: "59", description: "Para quem quer mais automação e controle.", featured: true, items: ["Tudo do Essencial", "Recorrências", "WhatsApp", "Relatórios avançados", "Mais recursos de gestão"] },
+  { name: "Empresarial", price: "99", description: "Para operações que precisam de uma gestão completa.", items: ["Tudo do Profissional", "Estrutura para equipes", "Mais automações", "Suporte prioritário"] },
+];
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-white">
+      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+          <Logo />
+          <nav className="hidden items-center gap-7 text-sm font-semibold text-slate-600 md:flex">
+            <a href="#recursos" className="hover:text-blue-600">Recursos</a>
+            <a href="#como-funciona" className="hover:text-blue-600">Como funciona</a>
+            <a href="#planos" className="hover:text-blue-600">Planos</a>
+            <a href="#faq" className="hover:text-blue-600">FAQ</a>
+          </nav>
+          <div className="flex gap-2">
+            <Link href="/login" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-600 hover:bg-slate-50">Entrar</Link>
+            <Link href="/cadastro" className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700">Começar agora</Link>
+          </div>
+        </div>
+      </header>
+
+      <section className="overflow-hidden bg-[radial-gradient(circle_at_top_right,_#dbeafe,_transparent_42%),linear-gradient(180deg,#fff_0%,#eff6ff_100%)]">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-28">
+          <div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-extrabold text-blue-700 shadow-sm">
+              <Sparkles size={15} /> Gestão de cobranças mais simples
+            </div>
+            <h1 className="max-w-3xl text-5xl font-black tracking-[-0.04em] text-slate-950 sm:text-6xl lg:text-7xl">
+              Organize suas cobranças e tenha <span className="text-blue-600">mais controle.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+              O Gestor I9 reúne clientes, cobranças, recorrências, financeiro, WhatsApp e relatórios em um só lugar.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/cadastro" className="flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 font-extrabold text-white shadow-xl shadow-blue-600/20 hover:bg-blue-700">
+                Criar minha conta <ArrowRight size={18} />
+              </Link>
+              <a href="#recursos" className="rounded-2xl border border-slate-200 bg-white px-7 py-4 text-center font-extrabold text-slate-800 hover:bg-slate-50">Conhecer recursos</a>
+            </div>
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-slate-500">
+              <span><CheckCircle2 size={16} className="mr-1 inline text-emerald-500" /> Interface simples</span>
+              <span><CheckCircle2 size={16} className="mr-1 inline text-emerald-500" /> Visão financeira</span>
+              <span><CheckCircle2 size={16} className="mr-1 inline text-emerald-500" /> Acesso online</span>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute -inset-8 rounded-full bg-blue-200/30 blur-3xl" />
+            <div className="relative rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-blue-900/10 sm:p-6">
+              <div className="rounded-2xl bg-slate-950 p-5 text-white">
+                <div className="flex items-center justify-between">
+                  <div><p className="text-xs font-semibold text-slate-400">Visão geral</p><p className="mt-1 text-xl font-black">Seu financeiro</p></div>
+                  <div className="rounded-xl bg-blue-500/15 p-2 text-blue-400"><BarChart3 size={20}/></div>
+                </div>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  <div className="rounded-2xl bg-white/10 p-4"><p className="text-xs text-slate-400">Recebido</p><p className="mt-2 text-2xl font-black">R$ 18.450</p><p className="mt-1 text-xs text-emerald-400">+12,8% no período</p></div>
+                  <div className="rounded-2xl bg-white/10 p-4"><p className="text-xs text-slate-400">Em aberto</p><p className="mt-2 text-2xl font-black">R$ 7.280</p><p className="mt-1 text-xs text-amber-300">Acompanhar</p></div>
+                </div>
+                <div className="mt-4 rounded-2xl bg-white/5 p-4">
+                  <div className="mb-4 flex items-center justify-between text-xs text-slate-400"><span>Recebimentos</span><span>Últimos meses</span></div>
+                  <div className="flex h-32 items-end gap-2">{[35,52,42,66,58,78,70,94,80,88,100,91].map((h,i)=><div key={i} className="flex-1 rounded-t bg-blue-500/80" style={{height:h+"%"}} />)}</div>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-3 gap-3 text-center">
+                {["Clientes","Cobranças","Relatórios"].map((item)=><div key={item} className="rounded-xl bg-slate-50 p-3 text-xs font-bold text-slate-600">{item}</div>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="recursos" className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
+        <div className="max-w-2xl"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Recursos</p><h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Tudo que sua operação precisa para cobrar e acompanhar.</h2><p className="mt-4 leading-7 text-slate-600">Uma experiência pensada para reduzir a desorganização e deixar as informações importantes sempre à mão.</p></div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map(({title,text:description,icon:Icon})=><div key={title} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60"><div className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white"><Icon size={22}/></div><h3 className="mt-5 text-lg font-extrabold">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{description}</p></div>)}
+        </div>
+      </section>
+
+      <section id="como-funciona" className="bg-slate-50">
+        <div className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
+          <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Como funciona</p><h2 className="mt-3 text-3xl font-black sm:text-4xl">Comece em poucos passos.</h2></div>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {[["01","Cadastre seus clientes","Tenha os contatos e informações da sua carteira organizados."],["02","Crie suas cobranças","Registre valores, vencimentos e acompanhe cada cobrança."],["03","Acompanhe o financeiro","Use o dashboard e os relatórios para entender sua operação."]].map(([n,t,d])=><div key={n} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div className="text-4xl font-black text-blue-100">{n}</div><h3 className="mt-4 text-xl font-extrabold">{t}</h3><p className="mt-2 leading-7 text-slate-500">{d}</p></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="planos" className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
+        <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Planos</p><h2 className="mt-3 text-3xl font-black sm:text-4xl">Escolha a estrutura para sua operação.</h2><p className="mx-auto mt-4 max-w-2xl text-slate-600">Valores apresentados como referência comercial. A cobrança dos planos será conectada ao fluxo de assinatura.</p></div>
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {plans.map(plan=><div key={plan.name} className={plan.featured ? "relative rounded-3xl border-2 border-blue-600 bg-white p-7 shadow-2xl shadow-blue-100" : "rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"}>{plan.featured && <div className="absolute -top-3 left-6 rounded-full bg-blue-600 px-3 py-1 text-xs font-black text-white">Mais completo</div>}<h3 className="text-xl font-black">{plan.name}</h3><p className="mt-2 min-h-12 text-sm text-slate-500">{plan.description}</p><div className="mt-5"><span className="text-4xl font-black">R$ {plan.price}</span><span className="text-sm text-slate-500">/mês</span></div><Link href="/cadastro" className={plan.featured ? "mt-6 flex justify-center rounded-xl bg-blue-600 px-4 py-3 font-extrabold text-white hover:bg-blue-700" : "mt-6 flex justify-center rounded-xl border border-slate-200 px-4 py-3 font-extrabold text-slate-800 hover:bg-slate-50"}>Começar agora</Link><ul className="mt-6 space-y-3">{plan.items.map(item=><li key={item} className="flex gap-2 text-sm text-slate-600"><Check size={17} className="mt-0.5 shrink-0 text-emerald-500"/>{item}</li>)}</ul></div>)}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-5 pb-20">
+        <div className="rounded-[2rem] bg-blue-600 p-8 text-white shadow-2xl shadow-blue-200 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-blue-100">Comece sua estrutura no Gestor I9 e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-blue-700">Criar minha conta <ArrowRight size={18}/></Link></div></div>
+      </section>
+
+      <section id="faq" className="border-t border-slate-200 bg-slate-50">
+        <div className="mx-auto max-w-4xl px-5 py-20">
+          <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">FAQ</p><h2 className="mt-3 text-3xl font-black">Perguntas frequentes</h2></div>
+          <div className="mt-10 space-y-3">
+            {[["Preciso instalar alguma coisa?","Não. O Gestor I9 foi pensado para acesso online, pelo navegador."],["Posso começar com poucos clientes?","Sim. A estrutura foi desenhada para acompanhar operações de diferentes tamanhos."],["O sistema trabalha com cobranças recorrentes?","Sim. Existe uma área própria para organizar recorrências e acompanhar seus ciclos."],["Posso testar antes de contratar um plano?","O cadastro inicial permite entrar na plataforma e conhecer a experiência. As condições comerciais podem ser ajustadas antes da cobrança dos planos."]].map(([q,a])=><details key={q} className="group rounded-2xl border border-slate-200 bg-white p-5"><summary className="cursor-pointer list-none font-extrabold text-slate-800">{q}</summary><p className="mt-3 pr-6 text-sm leading-6 text-slate-500">{a}</p></details>)}
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} Gestor I9. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-blue-600">Acessar plataforma →</Link></div>
+      </footer>
+    </main>
+  );
+}
