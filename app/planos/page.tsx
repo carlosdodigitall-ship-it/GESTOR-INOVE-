@@ -23,7 +23,7 @@ export default function PlanosPage(){
    supabase.from("plans").select("id,category_id,name,whatsapp,description,price,unit,duration_value,duration_unit,status,plan_categories(id,name,color)").eq("organization_id",member.organization_id).order("created_at",{ascending:false}),
    supabase.from("plan_categories").select("id,name,color").eq("organization_id",member.organization_id).eq("status","active").order("name")
   ]);
-  if(p.error)setError(p.error.message);else setPlans((p.data||[]) as Plan[]);
+  if(p.error)setError(p.error.message);else setPlans(((p.data||[]) as unknown as Array<Omit<Plan,"plan_categories"> & {plan_categories?: Category[] | Category | null}>).map((row)=>({ ...row, plan_categories: Array.isArray(row.plan_categories) ? (row.plan_categories[0] ?? null) : (row.plan_categories ?? null) })));
   if(c.error)setError(c.error.message);else setCategories(c.data||[]);
   setLoading(false);
  }
