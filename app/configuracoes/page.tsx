@@ -1,0 +1,1 @@
+import {DashboardShell} from "@/components/dashboard-shell";export default function Page(){return <DashboardShell title="Configuracoes"><div className="rounded-2xl border bg-white p-6 shadow-sm"><h2 className="text-xl font-black">Configuracoes</h2><p className="mt-2 text-sm text-slate-500">Módulo preparado para integração com Supabase e dados reais.</p></div></DashboardShell>}
