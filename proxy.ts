@@ -66,7 +66,9 @@ export async function proxy(request: NextRequest) {
 
   if (path === "/login" && data?.claims) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    const next = url.searchParams.get("next");
+    url.pathname = next && next.startsWith("/") ? next : "/dashboard";
+    url.searchParams.delete("next");
     return NextResponse.redirect(url);
   }
 
