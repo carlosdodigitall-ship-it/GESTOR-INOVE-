@@ -45,12 +45,12 @@ export async function POST() {
 
   const admin = createAdminSupabaseClient();
   await admin
-    .from("private.oauth_states")
+    .from("oauth_states")
     .delete()
     .eq("user_id", user.id)
     .eq("provider", "mercado_pago");
 
-  const { error } = await admin.from("private.oauth_states").insert({
+  const { error } = await admin.from("oauth_states").insert({
     state,
     organization_id: member.organization_id,
     user_id: user.id,
@@ -61,14 +61,14 @@ export async function POST() {
 
   if (error) return NextResponse.json({ error: "Não foi possível iniciar a conexão com o Mercado Pago." }, { status: 500 });
 
-  const url = new URL("https://auth.mercadopago.com/authorization");
-  url.searchParams.set("client_id", clientId);
-  url.searchParams.set("response_type", "code");
-  url.searchParams.set("platform_id", "mp");
-  url.searchParams.set("state", state);
-  url.searchParams.set("redirect_uri", redirectUri);
-  url.searchParams.set("code_challenge", challenge);
-  url.searchParams.set("code_challenge_method", "S256");
+  const authUrl = new URL("https://auth.mercadopago.com/authorization");
+  authUrl.searchParams.set("client_id", clientId);
+  authUrl.searchParams.set("response_type", "code");
+  authUrl.searchParams.set("platform_id", "mp");
+  authUrl.searchParams.set("state", state);
+  authUrl.searchParams.set("redirect_uri", redirectUri);
+  authUrl.searchParams.set("code_challenge", challenge);
+  authUrl.searchParams.set("code_challenge_method", "S256");
 
-  return NextResponse.json({ url: url.toString() });
+  return NextResponse.json({ url: authUrl.toString() });
 }
