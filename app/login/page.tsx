@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 "use client";
 
 import Link from "next/link";
@@ -10,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
-  const supabase = createClient();
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [error,setError] = useState("");
@@ -18,6 +15,7 @@ export default function Login() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    const supabase = createClient();
     setError("");
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
