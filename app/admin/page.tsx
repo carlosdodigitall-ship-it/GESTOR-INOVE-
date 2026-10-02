@@ -1,10 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
 import {useEffect,useMemo,useState} from "react";
 import {ShieldCheck,Users,Building2,ReceiptText,WalletCards,RefreshCw,Search,Lightbulb,Crown} from "lucide-react";
 
 const money=(v:number)=>Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 
 export default function AdminPage(){
+ const router=useRouter();
  const [data,setData]=useState<any>(null),[loading,setLoading]=useState(true),[error,setError]=useState(""),[tab,setTab]=useState("overview"),[search,setSearch]=useState("");
  async function load(){setLoading(true);setError("");try{const r=await fetch("/api/admin",{cache:"no-store"});const j=await r.json();if(!r.ok)throw new Error(j.error||"Acesso negado");setData(j)}catch(e:any){setError(e.message)}finally{setLoading(false)}}
  useEffect(()=>{load()},[]);
