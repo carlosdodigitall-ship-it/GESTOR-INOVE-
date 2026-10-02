@@ -2,28 +2,41 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function proxy(request: NextRequest) {
-  let response = NextResponse.next({ request });
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll() { return request.cookies.getAll(); },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          response = NextResponse.next({ request });
-          cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
-        },
-      },
-    }
-  );
-
-  const { data } = await supabase.auth.getClaims();
   const path = request.nextUrl.pathname;
   const protectedRoute =
     path.startsWith("/dashboard") ||
     path.startsWith("/assinatura") ||
     ["/clientes","/planos","/categorias","/cobrancas","/recorrencias","/financeiro","/whatsapp","/relatorios","/configuracoes"].some((p) => path.startsWith(p));
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+  // Never crash the entire application when Vercel is missing Supabase variables.
+  // Public pages remain available; protected pages redirect to login.
+  if (!supabaseUrl || !supabaseKey) {
+    if (protectedRoute) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("next", path);
+      url.searchParams.set("config", "supabase");
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.next();
+  }
+
+  let response = NextResponse.next({ request });
+  const supabase = createServerClient(supabaseUrl, supabaseKey, {
+    cookies: {
+      getAll() { return request.cookies.getAll(); },
+      setAll(cookiesToSet) {
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+        response = NextResponse.next({ request });
+        cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
+      },
+    },
+  });
+
+  const { data } = await supabase.auth.getClaims();
 
   if (protectedRoute && !data?.claims) {
     const url = request.nextUrl.clone();
@@ -43,7 +56,7 @@ export async function proxy(request: NextRequest) {
     const org = Array.isArray(member?.organizations) ? member?.organizations[0] : member?.organizations;
     if (path.startsWith("/assinatura")) return response;
 
-    if (org && (org.access_status === "blocked" || (org.access_status === "trial" && new Date(org.trial_ends_at) < new Date()))) {
+    if (org && (org.access_status === "blocked" || (org.access_status === "trial" && org.trial_ends_at && new Date(org.trial_ends_at) < new Date()))) {
       const url = request.nextUrl.clone();
       url.pathname = "/bloqueado";
       return NextResponse.redirect(url);
