@@ -87,7 +87,13 @@ export default function IntegracoesPage() {
     setLoading(false);
   }
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const result = params.get("mercado_pago");
+    if (result === "connected") setMessage("Mercado Pago conectado com sucesso. A conta está pronta para os próximos fluxos de cobrança e split.");
+    if (result === "error") setMessage("Não foi possível concluir a conexão com o Mercado Pago. Verifique a configuração da aplicação e tente novamente.");
+    load();
+  }, []);
 
   function getIntegration(provider: Provider) {
     return rows.find((item) => item.provider === provider);
@@ -120,9 +126,16 @@ export default function IntegracoesPage() {
   async function disconnect(provider: Provider) {
     if (!confirm("Desconectar esta integração?")) return;
     setBusy(provider);
-    const supabase = createClient();
-    const current = getIntegration(provider);
-    if (current) await supabase.from("payment_integrations").delete().eq("id", current.id);
+    setMessage("");
+    if (provider === "mercado_pago") {
+      const response = await fetch("/api/integracoes/mercado_pago/disconnect", { method: "POST" });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) setMessage(body.error || "Não foi possível desconectar.");
+    } else {
+      const supabase = createClient();
+      const current = getIntegration(provider);
+      if (current) await supabase.from("payment_integrations").delete().eq("id", current.id);
+    }
     await load();
     setBusy(null);
   }
@@ -136,7 +149,7 @@ export default function IntegracoesPage() {
             <div>
               <h1 className="text-2xl font-black">Integrações Reais</h1>
               <p className="mt-1 max-w-2xl text-sm leading-6 text-blue-100">
-                Conecte o Gestor I9 ao provedor de pagamentos que sua empresa utiliza. Cada organização terá sua própria conexão e seus próprios recebimentos.
+                Conecte o Gestor I9 ao provedor de pagamentos que sua empresa utiliza. Cada organização terá sua própria conexão, recebimentos e futuras regras de split.
               </p>
             </div>
           </div>
@@ -154,7 +167,7 @@ export default function IntegracoesPage() {
         <div>
           <div className="mb-4">
             <h2 className="text-xl font-black text-slate-950">Pagamentos</h2>
-            <p className="mt-1 text-sm text-slate-500">Escolha o provedor que deseja usar para gerar e sincronizar cobranças.</p>
+            <p className="mt-1 text-sm text-slate-500">Começamos pelo Mercado Pago com OAuth seguro. Outras integrações poderão ser ativadas sem alterar a conta do usuário.</p>
           </div>
 
           {loading ? (
@@ -216,7 +229,7 @@ export default function IntegracoesPage() {
           <div className="mt-4 grid gap-3 text-sm text-slate-600 md:grid-cols-3">
             <div><strong className="text-slate-950">1. Usuário conecta</strong><p className="mt-1">Cada cliente escolhe seu provedor.</p></div>
             <div><strong className="text-slate-950">2. Gestor I9 sincroniza</strong><p className="mt-1">Cobranças e status entram no sistema.</p></div>
-            <div><strong className="text-slate-950">3. Webhooks confirmam</strong><p className="mt-1">Pagamentos recebidos atualizam o financeiro.</p></div>
+            <div><strong className="text-slate-950">3. Webhooks confirmam</strong><p className="mt-1">Pagamentos recebidos atualizam o financeiro e, depois, o split e as taxas.</p></div>
           </div>
         </div>
       </div>
