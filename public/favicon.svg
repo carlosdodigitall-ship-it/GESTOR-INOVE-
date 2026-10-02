@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1F4D"/>
+      <stop offset="100%" stop-color="#1677FF"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#58A6FF"/>
+      <stop offset="100%" stop-color="#1261D6"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#bg)"/>
+  <path
+    d="M30 78
+       C25 78 21 74 21 68
+       C21 61 27 57 34 57
+       C37 47 46 41 56 41
+       C67 41 76 48 79 58
+       C87 57 94 62 94 70
+       C94 77 89 82 81 82
+       H34
+       C32 82 30 80 30 78Z"
+    fill="url(#cloud)"
+  />
+  <path
+    d="M69 48 L52 72 H64 L57 96 L79 67 H67 Z"
+    fill="#22C55E"
+    stroke="#A7F3D0"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+</svg>
