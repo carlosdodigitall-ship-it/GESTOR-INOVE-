@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
@@ -8,7 +6,6 @@ import { createClient } from "@/lib/supabase/client";
 import { DashboardShell } from "@/components/dashboard-shell";
 
 type Category = { id:string; name:string; description:string|null; color:string|null; status:string; created_at:string };
-const supabase=createClient();
 
 export default function CategoriasPage(){
   const [categories,setCategories]=useState<Category[]>([]);
@@ -24,6 +21,7 @@ export default function CategoriasPage(){
   const [error,setError]=useState("");
 
   async function load(){
+    const supabase=createClient();
     setLoading(true); setError("");
     const {data:{user}}=await supabase.auth.getUser();
     if(!user){setLoading(false);return;}
@@ -39,6 +37,7 @@ export default function CategoriasPage(){
   function openNew(){setEditing(null);setName("");setDescription("");setColor("#2563eb");setError("");setModal(true)}
   function openEdit(c:Category){setEditing(c);setName(c.name);setDescription(c.description||"");setColor(c.color||"#2563eb");setError("");setModal(true)}
   async function save(e:FormEvent){
+    const supabase=createClient();
     e.preventDefault(); if(!orgId||!name.trim()){setError("Informe o nome da categoria.");return}
     setSaving(true);setError("");
     const payload={organization_id:orgId,name:name.trim(),description:description.trim()||null,color,status:"active"};
@@ -49,6 +48,7 @@ export default function CategoriasPage(){
     setSaving(false);
   }
   async function remove(id:string){
+    const supabase=createClient();
     if(!confirm("Excluir esta categoria? Os planos vinculados ficarão sem categoria."))return;
     const {error}=await supabase.from("plan_categories").delete().eq("id",id);
     if(error)setError(error.message);else await load();
