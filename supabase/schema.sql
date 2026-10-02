@@ -33,7 +33,11 @@ begin
  insert into public.organizations(name,owner_id) values(coalesce(nullif(new.raw_user_meta_data->>'organization_name',''),'Minha empresa'),new.id) returning id into new_org;
  insert into public.organization_members(organization_id,user_id,role) values(new_org,new.id,'owner') on conflict do nothing;
  return new;
-end; $$;
+end; $;
+
+revoke execute on function public.handle_new_user() from public;
+revoke execute on function public.enforce_trial_customer_limit() from public;
+revoke execute on function public.enforce_trial_whatsapp_limit() from public;
 
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created after insert on auth.users for each row execute function public.handle_new_user();
