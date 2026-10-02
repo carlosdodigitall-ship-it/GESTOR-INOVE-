@@ -16,27 +16,54 @@ export default function Cadastro() {
   const [notice,setNotice] = useState("");
   const [loading,setLoading] = useState(false);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const supabase = createClient();
-    setError(""); setNotice(""); setLoading(true);
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { full_name: name, phone, organization_name: name || "Minha empresa" } }
-    });
-    if (error) {
-      setError(error.message);
+    if (loading) return;
+    setError("");
+    setNotice("");
+    setLoading(true);
+
+    try {
+      const supabase = createClient();
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanName = name.trim();
+      const cleanPhone = phone.trim();
+
+      if (!cleanName || !cleanPhone || !cleanEmail || password.length < 6) {
+        setError("Preencha todos os campos corretamente. A senha deve ter pelo menos 6 caracteres.");
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email: cleanEmail,
+        password,
+        options: {
+          data: {
+            full_name: cleanName,
+            phone: cleanPhone,
+            organization_name: cleanName || "Minha empresa",
+          },
+        },
+      });
+
+      if (error) {
+        setError(`Não foi possível criar a conta: ${error.message}`);
+        return;
+      }
+
+      if (data.session) {
+        router.replace("/dashboard");
+        router.refresh();
+        return;
+      }
+
+      setNotice("Conta criada com sucesso. Verifique seu e-mail se a confirmação estiver ativada.");
+    } catch (err) {
+      console.error("Erro no cadastro:", err);
+      setError("Não foi possível conectar ao servidor. Verifique a conexão e tente novamente.");
+    } finally {
       setLoading(false);
-      return;
     }
-    if (data.session) {
-      router.replace("/dashboard");
-      router.refresh();
-      return;
-    }
-    setNotice("Cadastro criado. Se a confirmação de e-mail estiver ativada no Supabase, confirme o e-mail antes de entrar.");
-    setLoading(false);
   }
 
   return <main className="grid min-h-screen place-items-center bg-slate-50 px-4 py-8">
@@ -50,10 +77,10 @@ export default function Cadastro() {
           <label className="block text-sm font-semibold">WhatsApp<input value={phone} onChange={e=>setPhone(e.target.value)} required type="tel" className="mt-2 w-full rounded-xl border px-4 py-3" placeholder="(75) 99999-9999"/></label>
           <label className="block text-sm font-semibold">E-mail<input value={email} onChange={e=>setEmail(e.target.value)} required type="email" autoComplete="email" className="mt-2 w-full rounded-xl border px-4 py-3" placeholder="voce@email.com"/></label>
           <label className="block text-sm font-semibold">Senha<input value={password} onChange={e=>setPassword(e.target.value)} required minLength={6} type="password" autoComplete="new-password" className="mt-2 w-full rounded-xl border px-4 py-3" placeholder="Mínimo de 6 caracteres"/></label>
-          <label className="flex gap-2 text-xs text-slate-500"><input type="checkbox" required/> Concordo com os termos.</label>
-          {error && <p className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-600">{error}</p>}
-          {notice && <p className="rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-700">{notice}</p>}
-          <button disabled={loading} className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white disabled:opacity-60">{loading ? "Criando..." : "Criar minha conta"}</button>
+          <label className="flex cursor-pointer items-start gap-2 text-xs text-slate-500"><input type="checkbox" required className="mt-0.5"/> <span>Concordo com os termos.</span></label>
+          {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-600">{error}</p>}
+          {notice && <p role="status" className="rounded-xl bg-emerald-50 p-3 text-sm font-semibold text-emerald-700">{notice}</p>}
+          <button type="submit" disabled={loading} className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white disabled:cursor-not-allowed disabled:opacity-60">{loading ? "Criando conta..." : "Criar minha conta"}</button>
         </form>
         <p className="mt-6 text-center text-sm text-slate-500">Já possui conta? <Link href="/login" className="font-bold text-blue-600">Entrar</Link></p>
       </div>
