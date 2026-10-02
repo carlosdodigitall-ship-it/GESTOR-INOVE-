@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
@@ -9,7 +7,6 @@ import { DashboardShell } from "@/components/dashboard-shell";
 
 type Category={id:string;name:string;color:string|null};
 type Plan={id:string;category_id:string|null;name:string;whatsapp:string;description:string;price:number;unit:string;duration_value:number;duration_unit:string;status:string;plan_categories?:Category|null};
-const supabase=createClient();
 
 export default function PlanosPage(){
  const [plans,setPlans]=useState<Plan[]>([]),[categories,setCategories]=useState<Category[]>([]),[orgId,setOrgId]=useState<string|null>(null);
@@ -17,6 +14,7 @@ export default function PlanosPage(){
  const [name,setName]=useState(""),[whatsapp,setWhatsapp]=useState(""),[description,setDescription]=useState(""),[categoryId,setCategoryId]=useState(""),[price,setPrice]=useState(""),[unit,setUnit]=useState("1 acesso"),[durationValue,setDurationValue]=useState("30"),[durationUnit,setDurationUnit]=useState("dias");
 
  async function load(){
+  const supabase=createClient();
   setLoading(true);setError("");const {data:{user}}=await supabase.auth.getUser();if(!user){setLoading(false);return}
   const {data:member}=await supabase.from("organization_members").select("organization_id").eq("user_id",user.id).limit(1).maybeSingle();
   if(!member){setError("Sua organização ainda não foi criada.");setLoading(false);return}
@@ -34,6 +32,7 @@ export default function PlanosPage(){
  function openNew(){reset();setModal(true)}
  function openEdit(p:Plan){setEditing(p);setName(p.name);setWhatsapp(p.whatsapp);setDescription(p.description);setCategoryId(p.category_id||"");setPrice(String(p.price));setUnit(p.unit);setDurationValue(String(p.duration_value));setDurationUnit(p.duration_unit);setError("");setModal(true)}
  async function save(e:FormEvent){
+  const supabase=createClient();
   e.preventDefault();setError("");
   if(!orgId)return setError("Organização não encontrada.");
   if(description.trim().length<100)return setError("A descrição precisa ter mais de 100 caracteres.");
@@ -46,8 +45,10 @@ export default function PlanosPage(){
   const result=editing?await supabase.from("plans").update(payload).eq("id",editing.id):await supabase.from("plans").insert(payload);
   if(result.error)setError(result.error.message);else{setModal(false);await load()}setSaving(false);
  }
- async function remove(id:string){if(!confirm("Excluir este plano?"))return;const {error}=await supabase.from("plans").delete().eq("id",id);if(error)setError(error.message);else await load()}
- async function duplicate(p:Plan){if(!orgId)return;const {error}=await supabase.from("plans").insert({...p,id:undefined,plan_categories:undefined,name:p.name+" — Cópia"} as never);if(error)setError(error.message);else await load()}
+ async function remove(id:string){
+  const supabase=createClient();if(!confirm("Excluir este plano?"))return;const {error}=await supabase.from("plans").delete().eq("id",id);if(error)setError(error.message);else await load()}
+ async function duplicate(p:Plan){
+  const supabase=createClient();if(!orgId)return;const {error}=await supabase.from("plans").insert({...p,id:undefined,plan_categories:undefined,name:p.name+" — Cópia"} as never);if(error)setError(error.message);else await load()}
  const filtered=useMemo(()=>plans.filter(p=>(p.name.toLowerCase().includes(query.toLowerCase())||p.description.toLowerCase().includes(query.toLowerCase()))&&(category==="all"||p.category_id===category)),[plans,query,category]);
  return <DashboardShell title="Planos"><div className="space-y-6">
   <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center"><div><h2 className="text-2xl font-black">Planos IPTV</h2><p className="mt-1 text-sm text-slate-500">Crie ofertas, defina duração, acessos e associe cada plano a uma categoria.</p></div><button onClick={openNew} className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white hover:bg-blue-700"><Plus size={18}/> Novo plano</button></div>
