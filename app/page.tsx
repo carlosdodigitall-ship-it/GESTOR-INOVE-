@@ -16,7 +16,7 @@ const plans = [
     name: "Teste Grátis",
     price: "0",
     period: "3 dias",
-    description: "Conheça o Gestor I9 antes de escolher seu plano.",
+    description: "Conheça o GestorPayOne antes de escolher seu plano.",
     badge: "Comece grátis",
     items: ["3 dias de acesso", "Até 1 cliente", "Até 1 WhatsApp", "Recursos principais da plataforma"],
   },
@@ -81,7 +81,7 @@ export default function Home() {
               Organize suas cobranças e tenha <span className="text-blue-600">mais controle.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-              O Gestor I9 reúne clientes, cobranças, recorrências, financeiro, WhatsApp e relatórios em um só lugar.
+              O GestorPayOne reúne clientes, cobranças, recorrências, financeiro, WhatsApp e relatórios em um só lugar.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/cadastro" className="flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-7 py-4 font-extrabold text-white shadow-xl shadow-blue-600/20 hover:bg-blue-700">
@@ -187,20 +187,20 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 pb-20">
-        <div className="rounded-[2rem] bg-blue-600 p-8 text-white shadow-2xl shadow-blue-200 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-blue-100">Comece sua estrutura no Gestor I9 e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-blue-700">Criar minha conta <ArrowRight size={18}/></Link></div></div>
+        <div className="rounded-[2rem] bg-blue-600 p-8 text-white shadow-2xl shadow-blue-200 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-blue-100">Comece sua estrutura no GestorPayOne e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-blue-700">Criar minha conta <ArrowRight size={18}/></Link></div></div>
       </section>
 
       <section id="faq" className="border-t border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-4xl px-5 py-20">
           <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">FAQ</p><h2 className="mt-3 text-3xl font-black">Perguntas frequentes</h2></div>
           <div className="mt-10 space-y-3">
-            {[["Preciso instalar alguma coisa?","Não. O Gestor I9 foi pensado para acesso online, pelo navegador."],["Posso começar com poucos clientes?","Sim. A estrutura foi desenhada para acompanhar operações de diferentes tamanhos."],["O sistema trabalha com cobranças recorrentes?","Sim. Existe uma área própria para organizar recorrências e acompanhar seus ciclos."],["Posso testar antes de contratar um plano?","O cadastro inicial permite entrar na plataforma e conhecer a experiência. As condições comerciais podem ser ajustadas antes da cobrança dos planos."]].map(([q,a])=><details key={q} className="group rounded-2xl border border-slate-200 bg-white p-5"><summary className="cursor-pointer list-none font-extrabold text-slate-800">{q}</summary><p className="mt-3 pr-6 text-sm leading-6 text-slate-500">{a}</p></details>)}
+            {[["Preciso instalar alguma coisa?","Não. O GestorPayOne foi pensado para acesso online, pelo navegador."],["Posso começar com poucos clientes?","Sim. A estrutura foi desenhada para acompanhar operações de diferentes tamanhos."],["O sistema trabalha com cobranças recorrentes?","Sim. Existe uma área própria para organizar recorrências e acompanhar seus ciclos."],["Posso testar antes de contratar um plano?","O cadastro inicial permite entrar na plataforma e conhecer a experiência. As condições comerciais podem ser ajustadas antes da cobrança dos planos."]].map(([q,a])=><details key={q} className="group rounded-2xl border border-slate-200 bg-white p-5"><summary className="cursor-pointer list-none font-extrabold text-slate-800">{q}</summary><p className="mt-3 pr-6 text-sm leading-6 text-slate-500">{a}</p></details>)}
           </div>
         </div>
       </section>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} Gestor I9. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-blue-600">Acessar plataforma →</Link></div>
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} GestorPayOne. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-blue-600">Acessar plataforma →</Link></div>
       </footer>
     </main>
   );
