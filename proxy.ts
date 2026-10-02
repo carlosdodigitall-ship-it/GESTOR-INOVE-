@@ -1,6 +1,15 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const supabaseUrl =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  "https://yfssdwvbghxyeqqhofal.supabase.co";
+
+const supabasePublishableKey =
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  "sb_publishable_byunObufi15FArLjOh9-Cg_BLij9JCb";
+
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const protectedRoute =
@@ -9,12 +18,7 @@ export async function proxy(request: NextRequest) {
     path.startsWith("/assinatura") ||
     ["/clientes","/planos","/categorias","/cobrancas","/recorrencias","/financeiro","/whatsapp","/relatorios","/configuracoes"].some((p) => path.startsWith(p));
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-  // Never crash the entire application when Vercel is missing Supabase variables.
-  // Public pages remain available; protected pages redirect to login.
-  if (!supabaseUrl || !supabaseKey) {
+  if (!supabaseUrl || !supabasePublishableKey) {
     if (protectedRoute) {
       const url = request.nextUrl.clone();
       url.pathname = "/login";
@@ -26,13 +30,17 @@ export async function proxy(request: NextRequest) {
   }
 
   let response = NextResponse.next({ request });
-  const supabase = createServerClient(supabaseUrl, supabaseKey, {
+  const supabase = createServerClient(supabaseUrl, supabasePublishableKey, {
     cookies: {
-      getAll() { return request.cookies.getAll(); },
+      getAll() {
+        return request.cookies.getAll();
+      },
       setAll(cookiesToSet) {
         cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
         response = NextResponse.next({ request });
-        cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
+        cookiesToSet.forEach(({ name, value, options }) =>
+          response.cookies.set(name, value, options)
+        );
       },
     },
   });
@@ -54,10 +62,19 @@ export async function proxy(request: NextRequest) {
       .limit(1)
       .maybeSingle();
 
-    const org = Array.isArray(member?.organizations) ? member?.organizations[0] : member?.organizations;
+    const org = Array.isArray(member?.organizations)
+      ? member?.organizations[0]
+      : member?.organizations;
+
     if (path.startsWith("/assinatura")) return response;
 
-    if (org && (org.access_status === "blocked" || (org.access_status === "trial" && org.trial_ends_at && new Date(org.trial_ends_at) < new Date()))) {
+    if (
+      org &&
+      (org.access_status === "blocked" ||
+        (org.access_status === "trial" &&
+          org.trial_ends_at &&
+          new Date(org.trial_ends_at) < new Date()))
+    ) {
       const url = request.nextUrl.clone();
       url.pathname = "/bloqueado";
       return NextResponse.redirect(url);
@@ -76,5 +93,19 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*","/dashboard/:path*","/assinatura/:path*","/clientes/:path*","/planos/:path*","/categorias/:path*","/cobrancas/:path*","/recorrencias/:path*","/financeiro/:path*","/whatsapp/:path*","/relatorios/:path*","/configuracoes/:path*","/login"],
+  matcher: [
+    "/admin/:path*",
+    "/dashboard/:path*",
+    "/assinatura/:path*",
+    "/clientes/:path*",
+    "/planos/:path*",
+    "/categorias/:path*",
+    "/cobrancas/:path*",
+    "/recorrencias/:path*",
+    "/financeiro/:path*",
+    "/whatsapp/:path*",
+    "/relatorios/:path*",
+    "/configuracoes/:path*",
+    "/login",
+  ],
 };

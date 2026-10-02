@@ -1,1 +1,9 @@
-import {NextResponse} from "next/server";export async function GET(){return NextResponse.json({ok:true,app:"Gestor I9",timestamp:new Date().toISOString()})}
+import { NextResponse } from "next/server";
+
+export async function GET() {
+  return NextResponse.json({
+    ok: true,
+    app: "Gestor Zap V2",
+    timestamp: new Date().toISOString(),
+  });
+}
