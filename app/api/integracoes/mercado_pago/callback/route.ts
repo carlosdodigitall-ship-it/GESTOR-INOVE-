@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 
   const admin = createAdminSupabaseClient();
   const { data: oauthState, error: stateError } = await admin
-    .from("private.oauth_states")
+    .from("oauth_states")
     .select("state,organization_id,user_id,code_verifier,expires_at")
     .eq("state", state)
     .eq("provider", "mercado_pago")
@@ -51,7 +51,7 @@ export async function GET(request: Request) {
 
   const tokenData = await tokenResponse.json().catch(() => ({}));
   if (!tokenResponse.ok || !tokenData.access_token) {
-    await admin.from("private.oauth_states").delete().eq("state", state);
+    await admin.from("oauth_states").delete().eq("state", state);
     return NextResponse.redirect(new URL(`${APP_HOME}?mercado_pago=error&reason=token_exchange`, url.origin));
   }
 
@@ -68,8 +68,6 @@ export async function GET(request: Request) {
     .eq("provider", "mercado_pago")
     .maybeSingle();
 
-  let integrationId = existing?.id;
-
   const integrationPayload = {
     organization_id: oauthState.organization_id,
     provider: "mercado_pago",
@@ -84,26 +82,24 @@ export async function GET(request: Request) {
     updated_at: new Date().toISOString(),
   };
 
+  let integrationId = existing?.id;
+
   if (integrationId) {
     const { error: updateError } = await admin.from("payment_integrations").update(integrationPayload).eq("id", integrationId);
     if (updateError) {
-      await admin.from("private.oauth_states").delete().eq("state", state);
+      await admin.from("oauth_states").delete().eq("state", state);
       return NextResponse.redirect(new URL(`${APP_HOME}?mercado_pago=error&reason=integration_save`, url.origin));
     }
   } else {
-    const { data: created, error: createError } = await admin
-      .from("payment_integrations")
-      .insert(integrationPayload)
-      .select("id")
-      .single();
+    const { data: created, error: createError } = await admin.from("payment_integrations").insert(integrationPayload).select("id").single();
     if (createError || !created) {
-      await admin.from("private.oauth_states").delete().eq("state", state);
+      await admin.from("oauth_states").delete().eq("state", state);
       return NextResponse.redirect(new URL(`${APP_HOME}?mercado_pago=error&reason=integration_save`, url.origin));
     }
     integrationId = created.id;
   }
 
-  const { error: tokenError } = await admin.from("private.payment_provider_tokens").upsert({
+  const { error: tokenError } = await admin.from("payment_provider_tokens").upsert({
     integration_id: integrationId,
     access_token: tokenData.access_token,
     refresh_token: tokenData.refresh_token || null,
@@ -111,7 +107,7 @@ export async function GET(request: Request) {
     updated_at: new Date().toISOString(),
   }, { onConflict: "integration_id" });
 
-  await admin.from("private.oauth_states").delete().eq("state", state);
+  await admin.from("oauth_states").delete().eq("state", state);
 
   if (tokenError) {
     return NextResponse.redirect(new URL(`${APP_HOME}?mercado_pago=error&reason=token_save`, url.origin));
