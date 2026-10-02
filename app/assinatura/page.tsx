@@ -31,7 +31,7 @@ export default function AssinaturaPage() {
     <main className="min-h-screen bg-[linear-gradient(180deg,#eff6ff_0%,#fff_55%)] px-5 py-12">
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Gestor I9</p>
+          <p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Gestor Zap V2</p>
           <h1 className="mt-3 text-4xl font-black text-slate-950 sm:text-5xl">Escolha seu plano</h1>
           <p className="mx-auto mt-4 max-w-2xl text-slate-600">Assine pela página segura e hospedada da Stripe. Depois podemos personalizar o checkout.</p>
         </div>

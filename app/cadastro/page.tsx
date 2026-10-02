@@ -43,8 +43,8 @@ export default function Cadastro() {
     <div className="w-full max-w-md">
       <div className="mb-8 flex justify-center"><Logo/></div>
       <div className="rounded-3xl border bg-white p-7 shadow-xl">
-        <h1 className="text-2xl font-black">Criar sua conta</h1>
-        <p className="mt-2 text-sm text-slate-500">Comece com seus dados básicos.</p>
+        <h1 className="text-2xl font-black">Criar sua conta no Gestor Zap V2</h1>
+        <p className="mt-2 text-sm text-slate-500">Comece agora no Gestor Zap V2.</p>
         <form onSubmit={handleSubmit} className="mt-7 space-y-4">
           <label className="block text-sm font-semibold">Nome<input value={name} onChange={e=>setName(e.target.value)} required className="mt-2 w-full rounded-xl border px-4 py-3" placeholder="Seu nome"/></label>
           <label className="block text-sm font-semibold">WhatsApp<input value={phone} onChange={e=>setPhone(e.target.value)} required type="tel" className="mt-2 w-full rounded-xl border px-4 py-3" placeholder="(75) 99999-9999"/></label>
