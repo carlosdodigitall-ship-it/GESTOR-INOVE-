@@ -67,3 +67,30 @@ drop policy if exists "plan categories org members" on public.plan_categories;
 create policy "plan categories org members" on public.plan_categories for all to authenticated using(public.is_org_member(organization_id)) with check(public.is_org_member(organization_id));
 drop policy if exists "plans org members" on public.plans;
 create policy "plans org members" on public.plans for all to authenticated using(public.is_org_member(organization_id)) with check(public.is_org_member(organization_id));
+
+
+-- Mercado Pago OAuth: tokens e estados ficam fora do acesso do navegador.
+create table if not exists public.payment_provider_tokens(
+  integration_id uuid primary key references public.payment_integrations(id) on delete cascade,
+  access_token text not null,
+  refresh_token text,
+  token_expires_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+alter table public.payment_provider_tokens enable row level security;
+revoke all on public.payment_provider_tokens from anon, authenticated;
+grant select, insert, update, delete on public.payment_provider_tokens to service_role;
+
+create table if not exists public.oauth_states(
+  state text primary key,
+  organization_id uuid not null references public.organizations(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  provider text not null,
+  code_verifier text,
+  expires_at timestamptz not null,
+  created_at timestamptz not null default now()
+);
+alter table public.oauth_states enable row level security;
+revoke all on public.oauth_states from anon, authenticated;
+grant select, insert, update, delete on public.oauth_states to service_role;
