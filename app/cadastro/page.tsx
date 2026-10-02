@@ -38,6 +38,7 @@ export default function Cadastro() {
         email: cleanEmail,
         password,
         options: {
+          emailRedirectTo: `${window.location.origin}/auth/confirm?next=/dashboard`,
           data: {
             full_name: cleanName,
             phone: cleanPhone,
@@ -57,7 +58,7 @@ export default function Cadastro() {
         return;
       }
 
-      setNotice("Conta criada com sucesso. Verifique seu e-mail se a confirmação estiver ativada.");
+      setNotice("Conta criada! Enviamos um e-mail de confirmação para você. Abra o e-mail e clique em “Confirmar meu e-mail” para entrar automaticamente no Dashboard.");
     } catch (err) {
       console.error("Erro no cadastro:", err);
       setError("Não foi possível conectar ao servidor. Verifique a conexão e tente novamente.");
