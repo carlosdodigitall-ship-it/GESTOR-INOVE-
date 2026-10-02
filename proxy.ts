@@ -4,6 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const protectedRoute =
+    path.startsWith("/admin") ||
     path.startsWith("/dashboard") ||
     path.startsWith("/assinatura") ||
     ["/clientes","/planos","/categorias","/cobrancas","/recorrencias","/financeiro","/whatsapp","/relatorios","/configuracoes"].some((p) => path.startsWith(p));
@@ -73,5 +74,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*","/assinatura/:path*","/clientes/:path*","/planos/:path*","/categorias/:path*","/cobrancas/:path*","/recorrencias/:path*","/financeiro/:path*","/whatsapp/:path*","/relatorios/:path*","/configuracoes/:path*","/login"],
+  matcher: ["/admin/:path*","/dashboard/:path*","/assinatura/:path*","/clientes/:path*","/planos/:path*","/categorias/:path*","/cobrancas/:path*","/recorrencias/:path*","/financeiro/:path*","/whatsapp/:path*","/relatorios/:path*","/configuracoes/:path*","/login"],
 };
