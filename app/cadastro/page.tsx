@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 "use client";
 
 import Link from "next/link";
@@ -10,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 export default function Cadastro() {
   const router = useRouter();
-  const supabase = createClient();
   const [name,setName] = useState("");
   const [phone,setPhone] = useState("");
   const [email,setEmail] = useState("");
@@ -21,6 +18,7 @@ export default function Cadastro() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    const supabase = createClient();
     setError(""); setNotice(""); setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email,
