@@ -17,7 +17,7 @@ export default function Cadastro() {
       const supabase=createClient(); const cleanEmail=email.trim().toLowerCase(),cleanName=name.trim(),cleanPhone=phone.trim();
       if(!cleanName||!cleanPhone||!cleanEmail||password.length<6){setError("Preencha todos os campos. A senha deve ter pelo menos 6 caracteres.");return;}
       const {data,error}=await supabase.auth.signUp({email:cleanEmail,password,options:{data:{full_name:cleanName,phone:cleanPhone,organization_name:cleanName||"Minha empresa"}}});
-      if(error){setError("Não foi possível criar a conta: "+error.message);return;}
+      if(error){\n        const msg=String(error.message||"").toLowerCase();\n        if(msg.includes("user already registered")||msg.includes("already registered")||msg.includes("already exists")){\n          setError("Este e-mail já possui uma conta no CloudZap. Entre com seus dados na página de login.");\n        }else{\n          setError("Não foi possível criar a conta: "+error.message);\n        }\n        return;\n      }
       if(!data.session){setError("A conta foi criada, mas o login automático não foi liberado. Confirme que 'Confirm email' está desativado no Supabase.");return;}
       try{const r=await fetch("/api/email/welcome",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:cleanName,email:cleanEmail})});if(!r.ok)console.warn("Conta criada, mas o e-mail de boas-vindas não foi enviado.");}catch(err){console.warn("Conta criada, mas o envio do e-mail falhou:",err);}
       router.replace("/dashboard");router.refresh();
@@ -43,7 +43,7 @@ export default function Cadastro() {
           <label className="block text-sm font-bold text-slate-700">E-mail<input value={email} onChange={e=>setEmail(e.target.value)} required type="email" autoComplete="email" className={field} placeholder="voce@email.com"/></label>
           <label className="block text-sm font-bold text-slate-700">Senha<input value={password} onChange={e=>setPassword(e.target.value)} required minLength={6} type="password" autoComplete="new-password" className={field} placeholder="Mínimo de 6 caracteres"/></label>
           <label className="flex cursor-pointer items-start gap-2 text-xs leading-5 text-slate-500"><input type="checkbox" required className="mt-1 accent-emerald-600"/><span>Concordo com os termos de uso do CloudZap.</span></label>
-          {error&&<p role="alert" className="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-semibold text-red-700">{error}</p>}
+          {error&&<div role="alert" className="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-semibold text-red-700"><p>{error}</p>{error.includes("já possui uma conta")&&<Link href="/login" className="mt-2 inline-flex font-black text-red-800 underline">Ir para o login</Link>}</div>}
           {notice&&<p role="status" className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm font-semibold text-emerald-700">{notice}</p>}
           <button type="submit" disabled={loading} className="w-full rounded-2xl bg-[#16845a] py-4 font-black text-white shadow-lg shadow-emerald-700/20 transition hover:bg-[#0f6b48] disabled:cursor-not-allowed disabled:opacity-60">{loading?"Criando sua conta...":"Criar minha conta"}</button>
         </form>
