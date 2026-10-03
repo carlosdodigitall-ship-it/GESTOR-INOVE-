@@ -202,6 +202,7 @@ export default function Home() {
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} CloudZap. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-emerald-600">Acessar plataforma →</Link></div>
       </footer>
-    </main>
+          <footer className="border-t border-slate-200 bg-slate-50"><div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-8 text-center text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:text-left"><p>© {new Date().getFullYear()} CloudZap. Todos os direitos reservados.</p><p>Suporte: <a href="mailto:suporte@cloudzapweb.site" className="font-bold text-emerald-700 hover:text-emerald-800">suporte@cloudzapweb.site</a></p></div></footer>
+</main>
   );
 }
