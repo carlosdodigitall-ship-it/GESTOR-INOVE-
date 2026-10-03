@@ -48,7 +48,7 @@ export default function Login() {
       <div className="w-full max-w-md">
         <div className="mb-8 flex justify-center"><Logo /></div>
         <div className="rounded-3xl border bg-white p-7 shadow-xl">
-          <h1 className="text-2xl font-black">Entrar no Gestor Zap V2</h1>
+          <h1 className="text-2xl font-black">Entrar no CloudZap</h1>
           <p className="mt-2 text-sm text-slate-500">Acesse sua conta.</p>
           <form onSubmit={handleSubmit} className="mt-7 space-y-4">
             <label className="block text-sm font-semibold">
