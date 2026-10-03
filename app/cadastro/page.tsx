@@ -48,7 +48,10 @@ export default function Cadastro() {
           <button type="submit" disabled={loading} className="w-full rounded-2xl bg-[#16845a] py-4 font-black text-white shadow-lg shadow-emerald-700/20 transition hover:bg-[#0f6b48] disabled:cursor-not-allowed disabled:opacity-60">{loading?"Criando sua conta...":"Criar minha conta"}</button>
         </form>
         <div className="mt-5 flex items-center justify-center gap-2 text-xs font-semibold text-slate-400"><ShieldCheck size={15} className="text-emerald-600"/> Seus dados são protegidos</div>
-        <p className="mt-5 text-center text-sm text-slate-500">Já possui conta? <Link href="/login" className="font-black text-emerald-700 hover:text-emerald-800">Entrar</Link></p>
+        <div className="mt-5 text-center">
+          <p className="text-sm text-slate-500">Já possui conta? <Link href="/login" className="font-black text-emerald-700 hover:text-emerald-800">Entrar</Link></p>
+          <p className="mt-3 text-xs text-slate-400">Suporte: <a href="mailto:suporte@cloudzapweb.site" className="font-bold text-emerald-700">suporte@cloudzapweb.site</a></p>
+        </div>
       </section>
     </div>
   </main>;
