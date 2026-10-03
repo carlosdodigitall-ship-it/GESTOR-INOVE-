@@ -64,9 +64,10 @@ export default function Login() {
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </form>
-          <p className="mt-6 text-center text-sm text-slate-500">
-            Não tem conta? <Link href="/cadastro" className="font-bold text-emerald-700">Criar cadastro</Link>
-          </p>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-slate-500">Não tem conta? <Link href="/cadastro" className="font-bold text-emerald-700">Criar cadastro</Link></p>
+            <p className="mt-3 text-xs text-slate-400">Precisa de ajuda? <a href="mailto:suporte@cloudzapweb.site" className="font-bold text-emerald-700">suporte@cloudzapweb.site</a></p>
+          </div>
         </div>
       </div>
     </main>
