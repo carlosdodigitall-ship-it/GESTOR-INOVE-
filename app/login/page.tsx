@@ -44,7 +44,7 @@ export default function Login() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-slate-50 px-4">
+    <main className="grid min-h-screen place-items-center bg-[#f4faf6] px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 flex justify-center"><Logo /></div>
         <div className="rounded-3xl border bg-white p-7 shadow-xl">
@@ -53,19 +53,19 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="mt-7 space-y-4">
             <label className="block text-sm font-semibold">
               E-mail
-              <input value={email} onChange={e => setEmail(e.target.value)} type="email" required autoComplete="email" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-500" />
+              <input value={email} onChange={e => setEmail(e.target.value)} type="email" required autoComplete="email" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
             </label>
             <label className="block text-sm font-semibold">
               Senha
-              <input value={password} onChange={e => setPassword(e.target.value)} type="password" required autoComplete="current-password" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-500" />
+              <input value={password} onChange={e => setPassword(e.target.value)} type="password" required autoComplete="current-password" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
             </label>
             {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-600">{error}</p>}
-            <button type="submit" disabled={loading} className="w-full rounded-xl bg-blue-600 py-3.5 font-bold text-white disabled:opacity-60">
+            <button type="submit" disabled={loading} className="w-full rounded-xl bg-[#16845a] py-3.5 font-bold text-white disabled:opacity-60">
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </form>
           <p className="mt-6 text-center text-sm text-slate-500">
-            Não tem conta? <Link href="/cadastro" className="font-bold text-blue-600">Criar cadastro</Link>
+            Não tem conta? <Link href="/cadastro" className="font-bold text-emerald-700">Criar cadastro</Link>
           </p>
         </div>
       </div>
