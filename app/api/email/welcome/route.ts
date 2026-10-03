@@ -35,6 +35,7 @@ export async function POST(request: NextRequest) {
       },
       body: JSON.stringify({
         from: FROM,
+        reply_to: "suporte@cloudzapweb.site",
         to: [user.email],
         subject: "Bem-vindo ao CloudZap",
         html: `
