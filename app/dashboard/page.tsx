@@ -3,7 +3,7 @@
 import {useEffect,useMemo,useState} from "react";
 import {DashboardShell} from "@/components/dashboard-shell";
 import {createClient} from "@/lib/supabase/client";
-import {Users,ReceiptText,WalletCards,AlertTriangle,Loader2,TrendingUp,ArrowUpRight} from "lucide-react";
+import {Users,ReceiptText,WalletCards,AlertTriangle,Loader2,TrendingUp,ArrowUpRight,MessagesSquare,BarChart3,PlugZap} from "lucide-react";
 
 type Charge={id:string;amount:number;due_date:string;status:string;description:string;customer_id?:string|null};
 type Customer={id:string;name:string};
@@ -106,6 +106,25 @@ export default function Dashboard(){
 
    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
     {cards.map(([a,b,c,I])=>{const Icon=I;return <div key={a} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex items-center justify-between"><p className="text-sm text-slate-500">{a}</p><Icon size={18} className="text-emerald-700"/></div><p className="mt-2 text-2xl font-black text-slate-950">{b}</p><p className="mt-2 text-xs font-bold text-slate-500">{c}</p></div>})}
+   </div>
+
+   <div className="mt-6">
+    <div className="mb-4">
+     <h2 className="text-xl font-black text-slate-950">Acesso rápido</h2>
+     <p className="text-sm text-slate-500">Tudo que você precisa para administrar sua operação.</p>
+    </div>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+     {[
+      {label:"Clientes",desc:"Cadastre e acompanhe seus clientes.",href:"/clientes",icon:Users,box:"bg-blue-600",soft:"bg-blue-50",text:"text-blue-700"},
+      {label:"Cobranças",desc:"Controle vencimentos e pagamentos.",href:"/cobrancas",icon:ReceiptText,box:"bg-violet-600",soft:"bg-violet-50",text:"text-violet-700"},
+      {label:"Planos",desc:"Organize seus planos e serviços.",href:"/planos",icon:WalletCards,box:"bg-amber-500",soft:"bg-amber-50",text:"text-amber-700"},
+      {label:"Financeiro",desc:"Acompanhe sua movimentação.",href:"/financeiro",icon:TrendingUp,box:"bg-emerald-600",soft:"bg-emerald-50",text:"text-emerald-700"},
+      {label:"CRM",desc:"Gerencie leads e oportunidades.",href:"/crm/kanban",icon:ArrowUpRight,box:"bg-fuchsia-600",soft:"bg-fuchsia-50",text:"text-fuchsia-700"},
+      {label:"WhatsApp",desc:"Centralize sua comunicação.",href:"/whatsapp",icon:MessagesSquare,box:"bg-cyan-600",soft:"bg-cyan-50",text:"text-cyan-700"},
+      {label:"Relatórios",desc:"Veja indicadores da operação.",href:"/relatorios",icon:BarChart3,box:"bg-indigo-600",soft:"bg-indigo-50",text:"text-indigo-700"},
+      {label:"Integrações",desc:"Conecte suas ferramentas.",href:"/integracoes",icon:PlugZap,box:"bg-slate-700",soft:"bg-slate-100",text:"text-slate-700"}
+     ].map(item=>{const Icon=item.icon;return <a key={item.label} href={item.href} className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div className="flex items-center gap-3"><div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl text-white ${item.box}`}><Icon size={20}/></div><div className="min-w-0"><h3 className="font-black text-slate-900">{item.label}</h3><p className="mt-0.5 text-xs leading-5 text-slate-500">{item.desc}</p></div></div><div className={`mt-4 inline-flex rounded-lg px-2.5 py-1 text-[11px] font-extrabold ${item.soft} ${item.text}`}>Acessar →</div></a>})}
+    </div>
    </div>
 
    <div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_.65fr]">
