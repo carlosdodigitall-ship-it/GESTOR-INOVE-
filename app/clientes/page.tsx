@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Plus, Search, Pencil, Trash2, X, Loader2, Users, CalendarDays,
   Package, UserRound, FileText, BellRing, Eye, Phone, Mail,
-  CreditCard, Clock3, CircleDollarSign, MessageSquare, Receipt,
+  CreditCard, Clock3, CircleDollarSign, MessageSquare, Receipt, Tag,
   CheckCircle2, AlertCircle
 } from "lucide-react";
 import { DashboardShell } from "@/components/dashboard-shell";
