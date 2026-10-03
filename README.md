@@ -9,3 +9,5 @@ Next.js + TypeScript + Tailwind CSS + Supabase + Stripe + integração WhatsApp/
 ## Deploy
 
 Atualização de sincronização do projeto Gestor Zap V2 com a Vercel.
+
+<!-- vercel-sync: 2026-10-03 -->
