@@ -18,7 +18,7 @@ export default function ObrigadoPage() {
           A confirmação definitiva da assinatura será feita pelo webhook da Stripe.
         </div>
         <Link href="/dashboard" className="mt-7 inline-flex rounded-xl bg-gradient-to-r from-emerald-800 via-emerald-600 to-lime-500 px-6 py-3.5 font-black text-white hover:from-emerald-900 hover:via-emerald-700 hover:to-lime-600">
-          Voltar ao Gestor I9
+          Voltar ao CloudZap
         </Link>
       </section>
     </main>
