@@ -100,7 +100,7 @@ export default function Dashboard(){
 
  return <DashboardShell title="Dashboard">
   {loading?<div className="flex items-center justify-center py-24"><Loader2 className="animate-spin text-emerald-700" size={30}/></div>:error?<div className="rounded-2xl border border-red-200 bg-red-50 p-5 text-red-700"><p className="font-black">Não foi possível carregar o dashboard</p><p className="mt-1 text-sm">{error}</p></div>:<>
-   <div className="mb-6 rounded-2xl border border-emerald-100 bg-gradient-to-r from-emerald-50 to-white p-5">
+   <div className="mb-6 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50 via-white to-lime-50 p-5">
     <div className="flex items-center gap-3"><div className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-600 text-white"><TrendingUp size={21}/></div><div><p className="text-xs font-extrabold uppercase tracking-widest text-emerald-700">CloudZap</p><h2 className="text-lg font-black text-slate-950">Visão geral da sua operação</h2></div></div>
    </div>
 
@@ -115,14 +115,14 @@ export default function Dashboard(){
     </div>
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
      {[
-      {label:"Clientes",desc:"Cadastre e acompanhe seus clientes.",href:"/clientes",icon:Users,box:"bg-blue-600",soft:"bg-blue-50",text:"text-blue-700"},
-      {label:"Cobranças",desc:"Controle vencimentos e pagamentos.",href:"/cobrancas",icon:ReceiptText,box:"bg-violet-600",soft:"bg-violet-50",text:"text-violet-700"},
-      {label:"Planos",desc:"Organize seus planos e serviços.",href:"/planos",icon:WalletCards,box:"bg-amber-500",soft:"bg-amber-50",text:"text-amber-700"},
-      {label:"Financeiro",desc:"Acompanhe sua movimentação.",href:"/financeiro",icon:TrendingUp,box:"bg-emerald-600",soft:"bg-emerald-50",text:"text-emerald-700"},
-      {label:"CRM",desc:"Gerencie leads e oportunidades.",href:"/crm/kanban",icon:ArrowUpRight,box:"bg-fuchsia-600",soft:"bg-fuchsia-50",text:"text-fuchsia-700"},
-      {label:"WhatsApp",desc:"Centralize sua comunicação.",href:"/whatsapp",icon:MessagesSquare,box:"bg-cyan-600",soft:"bg-cyan-50",text:"text-cyan-700"},
-      {label:"Relatórios",desc:"Veja indicadores da operação.",href:"/relatorios",icon:BarChart3,box:"bg-indigo-600",soft:"bg-indigo-50",text:"text-indigo-700"},
-      {label:"Integrações",desc:"Conecte suas ferramentas.",href:"/integracoes",icon:PlugZap,box:"bg-slate-700",soft:"bg-slate-100",text:"text-slate-700"}
+      {label:"Clientes",desc:"Cadastre e acompanhe seus clientes.",href:"/clientes",icon:Users,box:"bg-gradient-to-br from-emerald-700 to-emerald-500",soft:"bg-emerald-50",text:"text-emerald-700"},
+      {label:"Cobranças",desc:"Controle vencimentos e pagamentos.",href:"/cobrancas",icon:ReceiptText,box:"bg-gradient-to-br from-emerald-800 to-emerald-600",soft:"bg-emerald-50",text:"text-emerald-800"},
+      {label:"Planos",desc:"Organize seus planos e serviços.",href:"/planos",icon:WalletCards,box:"bg-gradient-to-br from-lime-600 to-emerald-600",soft:"bg-lime-50",text:"text-lime-800"},
+      {label:"Financeiro",desc:"Acompanhe sua movimentação.",href:"/financeiro",icon:TrendingUp,box:"bg-gradient-to-br from-emerald-600 to-teal-500",soft:"bg-emerald-50",text:"text-emerald-700"},
+      {label:"CRM",desc:"Gerencie leads e oportunidades.",href:"/crm/kanban",icon:ArrowUpRight,box:"bg-gradient-to-br from-emerald-900 to-emerald-700",soft:"bg-emerald-50",text:"text-emerald-900"},
+      {label:"WhatsApp",desc:"Centralize sua comunicação.",href:"/whatsapp",icon:MessagesSquare,box:"bg-gradient-to-br from-teal-600 to-emerald-500",soft:"bg-teal-50",text:"text-teal-800"},
+      {label:"Relatórios",desc:"Veja indicadores da operação.",href:"/relatorios",icon:BarChart3,box:"bg-gradient-to-br from-emerald-700 to-lime-500",soft:"bg-emerald-50",text:"text-emerald-800"},
+      {label:"Integrações",desc:"Conecte suas ferramentas.",href:"/integracoes",icon:PlugZap,box:"bg-gradient-to-br from-slate-900 to-emerald-800",soft:"bg-emerald-50",text:"text-emerald-900"}
      ].map(item=>{const Icon=item.icon;return <a key={item.label} href={item.href} className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div className="flex items-center gap-3"><div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl text-white ${item.box}`}><Icon size={20}/></div><div className="min-w-0"><h3 className="font-black text-slate-900">{item.label}</h3><p className="mt-0.5 text-xs leading-5 text-slate-500">{item.desc}</p></div></div><div className={`mt-4 inline-flex rounded-lg px-2.5 py-1 text-[11px] font-extrabold ${item.soft} ${item.text}`}>Acessar →</div></a>})}
     </div>
    </div>
