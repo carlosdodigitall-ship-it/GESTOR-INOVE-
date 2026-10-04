@@ -1,6 +1,6 @@
-# Gestor Zap V2
+# CloudZap
 
-SaaS de gestão de cobranças e financeiro.
+CRM + gestão de cobranças + automação para operações digitais.
 
 ## Stack
 
@@ -8,6 +8,6 @@ Next.js + TypeScript + Tailwind CSS + Supabase + Stripe + integração WhatsApp/
 
 ## Deploy
 
-Atualização de sincronização do projeto Gestor Zap V2 com a Vercel.
+Atualização de sincronização do projeto CloudZap com a Vercel.
 
 <!-- vercel-sync: 2026-10-03 -->
