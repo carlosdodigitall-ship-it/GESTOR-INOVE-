@@ -44,7 +44,7 @@ export default function Login() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-[#f4faf6] px-4">
+    <main className="grid min-h-screen place-items-center bg-[radial-gradient(circle_at_top_right,_#bbf7d0,_transparent_35%),linear-gradient(135deg,#ecfdf5_0%,#ffffff_58%,#f7fee7_100%)] px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 flex justify-center"><Logo /></div>
         <div className="rounded-3xl border bg-white p-7 shadow-xl">
@@ -60,7 +60,7 @@ export default function Login() {
               <input value={password} onChange={e => setPassword(e.target.value)} type="password" required autoComplete="current-password" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" />
             </label>
             {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-600">{error}</p>}
-            <button type="submit" disabled={loading} className="w-full rounded-xl bg-[#16845a] py-3.5 font-bold text-white disabled:opacity-60">
+            <button type="submit" disabled={loading} className="w-full rounded-xl bg-gradient-to-r from-emerald-800 via-emerald-600 to-lime-500 py-3.5 font-bold text-white shadow-lg shadow-emerald-700/20 transition hover:from-emerald-900 hover:via-emerald-700 hover:to-lime-600 disabled:opacity-60">
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </form>
