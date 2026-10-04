@@ -66,12 +66,12 @@ export default function Home() {
           </nav>
           <div className="flex gap-2">
             <Link href="/login" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-600 hover:bg-slate-50">Entrar</Link>
-            <Link href="/cadastro" className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 hover:bg-emerald-700">Começar agora</Link>
+            <Link href="/cadastro" className="rounded-xl bg-gradient-to-r from-emerald-700 via-emerald-600 to-lime-500 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-700/20 hover:from-emerald-800 hover:via-emerald-700 hover:to-lime-600">Começar agora</Link>
           </div>
         </div>
       </header>
 
-      <section className="overflow-hidden bg-[radial-gradient(circle_at_top_right,_#d9f5e7,_transparent_42%),linear-gradient(180deg,#fff_0%,#f0faf5_100%)]">
+      <section className="overflow-hidden bg-[radial-gradient(circle_at_top_right,_#b7f3d4,_transparent_38%),radial-gradient(circle_at_bottom_left,_#dcfce7,_transparent_36%),linear-gradient(180deg,#ffffff_0%,#ecfdf5_100%)]">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-28">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2 text-xs font-extrabold text-emerald-700 shadow-sm">
@@ -84,7 +84,7 @@ export default function Home() {
               O CloudZap reúne clientes, cobranças, recorrências, financeiro, WhatsApp e relatórios em um só lugar.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/cadastro" className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-7 py-4 font-extrabold text-white shadow-xl shadow-emerald-600/20 hover:bg-emerald-700">
+              <Link href="/cadastro" className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-700 via-emerald-600 to-lime-500 px-7 py-4 font-extrabold text-white shadow-xl shadow-emerald-700/25 hover:from-emerald-800 hover:via-emerald-700 hover:to-lime-600">
                 Criar minha conta <ArrowRight size={18} />
               </Link>
               <a href="#recursos" className="rounded-2xl border border-slate-200 bg-white px-7 py-4 text-center font-extrabold text-slate-800 hover:bg-slate-50">Conhecer recursos</a>
@@ -187,7 +187,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 pb-20">
-        <div className="rounded-[2rem] bg-emerald-600 p-8 text-white shadow-2xl shadow-emerald-200 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-emerald-100">Comece sua estrutura no CloudZap e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-emerald-700">Criar minha conta <ArrowRight size={18}/></Link></div></div>
+        <div className="rounded-[2rem] bg-gradient-to-br from-emerald-900 via-emerald-700 to-lime-600 p-8 text-white shadow-2xl shadow-emerald-900/25 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-emerald-100">Comece sua estrutura no CloudZap e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-emerald-800 shadow-lg">Criar minha conta <ArrowRight size={18}/></Link></div></div>
       </section>
 
       <section id="faq" className="border-t border-slate-200 bg-slate-50">
@@ -202,7 +202,7 @@ export default function Home() {
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} CloudZap. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-emerald-600">Acessar plataforma →</Link></div>
       </footer>
-          <footer className="border-t border-slate-200 bg-slate-50"><div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-8 text-center text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:text-left"><p>© {new Date().getFullYear()} CloudZap. Todos os direitos reservados.</p><p>Suporte: <a href="mailto:suporte@cloudzapweb.site" className="font-bold text-emerald-700 hover:text-emerald-800">suporte@cloudzapweb.site</a></p></div></footer>
+    
 </main>
   );
 }
