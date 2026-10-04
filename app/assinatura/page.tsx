@@ -28,23 +28,23 @@ export default function AssinaturaPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,#eff6ff_0%,#fff_55%)] px-5 py-12">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_right,_#bbf7d0,_transparent_36%),linear-gradient(180deg,#ecfdf5_0%,#ffffff_55%,#f7fee7_100%)] px-5 py-12">
       <div className="mx-auto max-w-5xl">
         <div className="text-center">
-          <p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Gestor Zap V2</p>
+          <p className="text-sm font-extrabold uppercase tracking-widest text-emerald-700">CloudZap</p>
           <h1 className="mt-3 text-4xl font-black text-slate-950 sm:text-5xl">Escolha seu plano</h1>
           <p className="mx-auto mt-4 max-w-2xl text-slate-600">Assine pela página segura e hospedada da Stripe. Depois podemos personalizar o checkout.</p>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {plans.map((plan, index) => (
-            <article key={plan.name} className={index === 1 ? "rounded-3xl border-2 border-blue-600 bg-white p-7 shadow-2xl shadow-blue-100" : "rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"}>
+            <article key={plan.name} className={index === 1 ? "rounded-3xl border-2 border-emerald-600 bg-white p-7 shadow-2xl shadow-emerald-100" : "rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"}>
               <h2 className="text-2xl font-black">{plan.name}</h2>
               <p className="mt-2 text-slate-500">{plan.description}</p>
               <p className="mt-6 text-4xl font-black text-slate-950">{plan.price}</p>
 
               {index === 0 ? (
-                <button onClick={checkout} disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 font-extrabold text-white hover:bg-blue-700 disabled:opacity-60">
+                <button onClick={checkout} disabled={loading} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-800 via-emerald-600 to-lime-500 px-4 py-3 font-extrabold text-white hover:from-emerald-900 hover:via-emerald-700 hover:to-lime-600 disabled:opacity-60">
                   {loading ? <Loader2 size={18} className="animate-spin" /> : null}
                   {loading ? "Abrindo Checkout..." : "Assinar por R$ 20"}
                 </button>
