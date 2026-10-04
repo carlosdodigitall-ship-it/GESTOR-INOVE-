@@ -17,7 +17,15 @@ export default function Cadastro() {
       const supabase=createClient(); const cleanEmail=email.trim().toLowerCase(),cleanName=name.trim(),cleanPhone=phone.trim();
       if(!cleanName||!cleanPhone||!cleanEmail||password.length<6){setError("Preencha todos os campos. A senha deve ter pelo menos 6 caracteres.");return;}
       const {data,error}=await supabase.auth.signUp({email:cleanEmail,password,options:{data:{full_name:cleanName,phone:cleanPhone,organization_name:cleanName||"Minha empresa"}}});
-      if(error){\n        const msg=String(error.message||"").toLowerCase();\n        if(msg.includes("user already registered")||msg.includes("already registered")||msg.includes("already exists")){\n          setError("Este e-mail já possui uma conta no CloudZap. Entre com seus dados na página de login.");\n        }else{\n          setError("Não foi possível criar a conta: "+error.message);\n        }\n        return;\n      }
+      if(error){
+        const msg=String(error.message||"").toLowerCase();
+        if(msg.includes("user already registered")||msg.includes("already registered")||msg.includes("already exists")){
+          setError("Este e-mail já possui uma conta no CloudZap. Entre com seus dados na página de login.");
+        }else{
+          setError("Não foi possível criar a conta: "+error.message);
+        }
+        return;
+      }
       if(!data.session){setError("A conta foi criada, mas o login automático não foi liberado. Confirme que 'Confirm email' está desativado no Supabase.");return;}
       try{const r=await fetch("/api/email/welcome",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:cleanName,email:cleanEmail})});if(!r.ok)console.warn("Conta criada, mas o e-mail de boas-vindas não foi enviado.");}catch(err){console.warn("Conta criada, mas o envio do e-mail falhou:",err);}
       router.replace("/dashboard");router.refresh();
