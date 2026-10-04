@@ -25,9 +25,9 @@ export default function Cadastro() {
     finally{setLoading(false);}
   }
   const field="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-slate-900 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100";
-  return <main className="min-h-screen bg-[#f4faf6] px-4 py-8 md:px-8">
+  return <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_#bbf7d0,_transparent_32%),linear-gradient(135deg,#ecfdf5_0%,#ffffff_55%,#f7fee7_100%)] px-4 py-8 md:px-8">
     <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-8 lg:grid-cols-[.9fr_1.1fr]">
-      <section className="hidden rounded-[2.5rem] bg-gradient-to-br from-[#0b5d3b] via-[#16845a] to-[#21a36d] p-10 text-white shadow-2xl shadow-emerald-900/15 lg:block">
+      <section className="hidden rounded-[2.5rem] bg-gradient-to-br from-[#022c22] via-[#047857] to-[#84cc16] p-10 text-white shadow-2xl shadow-emerald-900/15 lg:block">
         <Logo/>
         <div className="mt-20"><span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold"><Sparkles size={16}/> Comece sua organização</span>
         <h2 className="mt-6 text-5xl font-black leading-tight tracking-tight">Seu negócio mais organizado começa aqui.</h2>
@@ -45,7 +45,7 @@ export default function Cadastro() {
           <label className="flex cursor-pointer items-start gap-2 text-xs leading-5 text-slate-500"><input type="checkbox" required className="mt-1 accent-emerald-600"/><span>Concordo com os termos de uso do CloudZap.</span></label>
           {error&&<div role="alert" className="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-semibold text-red-700"><p>{error}</p>{error.includes("já possui uma conta")&&<Link href="/login" className="mt-2 inline-flex font-black text-red-800 underline">Ir para o login</Link>}</div>}
           {notice&&<p role="status" className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm font-semibold text-emerald-700">{notice}</p>}
-          <button type="submit" disabled={loading} className="w-full rounded-2xl bg-[#16845a] py-4 font-black text-white shadow-lg shadow-emerald-700/20 transition hover:bg-[#0f6b48] disabled:cursor-not-allowed disabled:opacity-60">{loading?"Criando sua conta...":"Criar minha conta"}</button>
+          <button type="submit" disabled={loading} className="w-full rounded-2xl bg-gradient-to-r from-emerald-800 via-emerald-600 to-lime-500 py-4 font-black text-white shadow-lg shadow-emerald-700/20 transition hover:from-emerald-900 hover:via-emerald-700 hover:to-lime-600 disabled:cursor-not-allowed disabled:opacity-60">{loading?"Criando sua conta...":"Criar minha conta"}</button>
         </form>
         <div className="mt-5 flex items-center justify-center gap-2 text-xs font-semibold text-slate-400"><ShieldCheck size={15} className="text-emerald-600"/> Seus dados são protegidos</div>
         <div className="mt-5 text-center">
