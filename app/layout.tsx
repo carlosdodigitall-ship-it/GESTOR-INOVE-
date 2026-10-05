@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CloudZap | CRM, Cobranças e Automação",
   description: "CloudZap: CRM, clientes, cobranças, automação, financeiro e recorrências em um só lugar.",
-  themeColor: "#047857",
+  themeColor: "#1d4ed8",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg", apple: "/favicon.svg" },
 };
 
