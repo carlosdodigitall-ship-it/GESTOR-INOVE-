@@ -56,7 +56,12 @@ export default function Login() {
               <input value={email} onChange={e => setEmail(e.target.value)} type="email" required autoComplete="email" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" />
             </label>
             <label className="block text-sm font-semibold">
-              Senha
+              <span className="flex items-center justify-between gap-3">
+                <span>Senha</span>
+                <Link href="/recuperar-senha" className="text-xs font-bold text-blue-700 hover:text-blue-800">
+                  Esqueci minha senha
+                </Link>
+              </span>
               <input value={password} onChange={e => setPassword(e.target.value)} type="password" required autoComplete="current-password" className="mt-2 w-full rounded-xl border px-4 py-3 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" />
             </label>
             {error && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm font-semibold text-red-600">{error}</p>}
