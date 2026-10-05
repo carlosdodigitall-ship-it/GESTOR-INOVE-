@@ -55,29 +55,33 @@ export async function proxy(request: NextRequest) {
   }
 
   if (protectedRoute && data?.claims) {
-    const { data: member } = await supabase
-      .from("organization_members")
-      .select("organization_id,organizations(access_status,trial_ends_at)")
-      .eq("user_id", data.claims.sub)
-      .limit(1)
-      .maybeSingle();
+    // /admin é protegido pelo is_admin em /api/admin e não deve ser
+    // bloqueado pelo período de teste da organização.
+    if (!path.startsWith("/admin")) {
+      const { data: member } = await supabase
+        .from("organization_members")
+        .select("organization_id,organizations(access_status,trial_ends_at)")
+        .eq("user_id", data.claims.sub)
+        .limit(1)
+        .maybeSingle();
 
-    const org = Array.isArray(member?.organizations)
-      ? member?.organizations[0]
-      : member?.organizations;
+      const org = Array.isArray(member?.organizations)
+        ? member?.organizations[0]
+        : member?.organizations;
 
-    if (path.startsWith("/assinatura")) return response;
+      if (path.startsWith("/assinatura")) return response;
 
-    if (
-      org &&
-      (org.access_status === "blocked" ||
-        (org.access_status === "trial" &&
-          org.trial_ends_at &&
-          new Date(org.trial_ends_at) < new Date()))
-    ) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/bloqueado";
-      return NextResponse.redirect(url);
+      if (
+        org &&
+        (org.access_status === "blocked" ||
+          (org.access_status === "trial" &&
+            org.trial_ends_at &&
+            new Date(org.trial_ends_at) < new Date()))
+      ) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/bloqueado";
+        return NextResponse.redirect(url);
+      }
     }
   }
 
