@@ -59,58 +59,58 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
           <Logo />
           <nav className="hidden items-center gap-7 text-sm font-semibold text-slate-600 md:flex">
-            <a href="#recursos" className="hover:text-emerald-600">Recursos</a>
-            <a href="#como-funciona" className="hover:text-emerald-600">Como funciona</a>
-            <a href="#planos" className="hover:text-emerald-600">Planos</a>
-            <a href="#faq" className="hover:text-emerald-600">FAQ</a>
+            <a href="#recursos" className="hover:text-blue-600">Recursos</a>
+            <a href="#como-funciona" className="hover:text-blue-600">Como funciona</a>
+            <a href="#planos" className="hover:text-blue-600">Planos</a>
+            <a href="#faq" className="hover:text-blue-600">FAQ</a>
           </nav>
           <div className="flex gap-2">
             <Link href="/login" className="rounded-xl px-3 py-2 text-sm font-bold text-slate-600 hover:bg-slate-50">Entrar</Link>
-            <Link href="/cadastro" className="rounded-xl bg-gradient-to-r from-emerald-700 via-emerald-600 to-lime-500 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-700/20 hover:from-emerald-800 hover:via-emerald-700 hover:to-lime-600">Começar agora</Link>
+            <Link href="/cadastro" className="rounded-xl bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-blue-700/20 hover:from-blue-800 hover:via-blue-700 hover:to-blue-600">Começar agora</Link>
           </div>
         </div>
       </header>
 
-      <section className="overflow-hidden bg-[radial-gradient(circle_at_top_right,_#b7f3d4,_transparent_38%),radial-gradient(circle_at_bottom_left,_#dcfce7,_transparent_36%),linear-gradient(180deg,#ffffff_0%,#ecfdf5_100%)]">
+      <section className="overflow-hidden bg-[radial-gradient(circle_at_top_right,_#bfdbfe,_transparent_38%),radial-gradient(circle_at_bottom_left,_#dbeafe,_transparent_36%),linear-gradient(180deg,#ffffff_0%,#eff6ff_100%)]">
         <div className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:py-28">
           <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-white px-4 py-2 text-xs font-extrabold text-emerald-700 shadow-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-extrabold text-blue-700 shadow-sm">
               <Sparkles size={15} /> Gestão de cobranças mais simples
             </div>
             <h1 className="max-w-3xl text-5xl font-black tracking-[-0.04em] text-slate-950 sm:text-6xl lg:text-7xl">
-              Organize suas cobranças e tenha <span className="text-emerald-600">mais controle.</span>
+              Organize suas cobranças e tenha <span className="text-blue-600">mais controle.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
               O CloudZap reúne clientes, cobranças, recorrências, financeiro, WhatsApp e relatórios em um só lugar.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/cadastro" className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-700 via-emerald-600 to-lime-500 px-7 py-4 font-extrabold text-white shadow-xl shadow-emerald-700/25 hover:from-emerald-800 hover:via-emerald-700 hover:to-lime-600">
+              <Link href="/cadastro" className="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 px-7 py-4 font-extrabold text-white shadow-xl shadow-blue-700/25 hover:from-blue-800 hover:via-blue-700 hover:to-blue-600">
                 Criar minha conta <ArrowRight size={18} />
               </Link>
               <a href="#recursos" className="rounded-2xl border border-slate-200 bg-white px-7 py-4 text-center font-extrabold text-slate-800 hover:bg-slate-50">Conhecer recursos</a>
             </div>
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-slate-500">
-              <span><CheckCircle2 size={16} className="mr-1 inline text-emerald-500" /> Interface simples</span>
-              <span><CheckCircle2 size={16} className="mr-1 inline text-emerald-500" /> Visão financeira</span>
-              <span><CheckCircle2 size={16} className="mr-1 inline text-emerald-500" /> Acesso online</span>
+              <span><CheckCircle2 size={16} className="mr-1 inline text-blue-500" /> Interface simples</span>
+              <span><CheckCircle2 size={16} className="mr-1 inline text-blue-500" /> Visão financeira</span>
+              <span><CheckCircle2 size={16} className="mr-1 inline text-blue-500" /> Acesso online</span>
             </div>
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-8 rounded-full bg-emerald-200/30 blur-3xl" />
-            <div className="relative rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-emerald-900/10 sm:p-6">
+            <div className="absolute -inset-8 rounded-full bg-blue-200/30 blur-3xl" />
+            <div className="relative rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl shadow-blue-900/10 sm:p-6">
               <div className="rounded-2xl bg-slate-950 p-5 text-white">
                 <div className="flex items-center justify-between">
                   <div><p className="text-xs font-semibold text-slate-400">Visão geral</p><p className="mt-1 text-xl font-black">Seu financeiro</p></div>
-                  <div className="rounded-xl bg-emerald-500/15 p-2 text-emerald-400"><BarChart3 size={20}/></div>
+                  <div className="rounded-xl bg-blue-500/15 p-2 text-blue-400"><BarChart3 size={20}/></div>
                 </div>
                 <div className="mt-6 grid grid-cols-2 gap-3">
-                  <div className="rounded-2xl bg-white/10 p-4"><p className="text-xs text-slate-400">Recebido</p><p className="mt-2 text-2xl font-black">R$ 18.450</p><p className="mt-1 text-xs text-emerald-400">+12,8% no período</p></div>
+                  <div className="rounded-2xl bg-white/10 p-4"><p className="text-xs text-slate-400">Recebido</p><p className="mt-2 text-2xl font-black">R$ 18.450</p><p className="mt-1 text-xs text-blue-400">+12,8% no período</p></div>
                   <div className="rounded-2xl bg-white/10 p-4"><p className="text-xs text-slate-400">Em aberto</p><p className="mt-2 text-2xl font-black">R$ 7.280</p><p className="mt-1 text-xs text-amber-300">Acompanhar</p></div>
                 </div>
                 <div className="mt-4 rounded-2xl bg-white/5 p-4">
                   <div className="mb-4 flex items-center justify-between text-xs text-slate-400"><span>Recebimentos</span><span>Últimos meses</span></div>
-                  <div className="flex h-32 items-end gap-2">{[35,52,42,66,58,78,70,94,80,88,100,91].map((h,i)=><div key={i} className="flex-1 rounded-t bg-emerald-500/80" style={{height:h+"%"}} />)}</div>
+                  <div className="flex h-32 items-end gap-2">{[35,52,42,66,58,78,70,94,80,88,100,91].map((h,i)=><div key={i} className="flex-1 rounded-t bg-blue-500/80" style={{height:h+"%"}} />)}</div>
                 </div>
               </div>
               <div className="mt-4 grid grid-cols-3 gap-3 text-center">
@@ -122,17 +122,17 @@ export default function Home() {
       </section>
 
       <section id="recursos" className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
-        <div className="max-w-2xl"><p className="text-sm font-extrabold uppercase tracking-widest text-emerald-600">Recursos</p><h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Tudo que sua operação precisa para cobrar e acompanhar.</h2><p className="mt-4 leading-7 text-slate-600">Uma experiência pensada para reduzir a desorganização e deixar as informações importantes sempre à mão.</p></div>
+        <div className="max-w-2xl"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Recursos</p><h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Tudo que sua operação precisa para cobrar e acompanhar.</h2><p className="mt-4 leading-7 text-slate-600">Uma experiência pensada para reduzir a desorganização e deixar as informações importantes sempre à mão.</p></div>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({title,text:description,icon:Icon})=><div key={title} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60"><div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white"><Icon size={22}/></div><h3 className="mt-5 text-lg font-extrabold">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{description}</p></div>)}
+          {features.map(({title,text:description,icon:Icon})=><div key={title} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60"><div className="grid h-12 w-12 place-items-center rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white"><Icon size={22}/></div><h3 className="mt-5 text-lg font-extrabold">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{description}</p></div>)}
         </div>
       </section>
 
       <section id="como-funciona" className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
-          <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-emerald-600">Como funciona</p><h2 className="mt-3 text-3xl font-black sm:text-4xl">Comece em poucos passos.</h2></div>
+          <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Como funciona</p><h2 className="mt-3 text-3xl font-black sm:text-4xl">Comece em poucos passos.</h2></div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[["01","Cadastre seus clientes","Tenha os contatos e informações da sua carteira organizados."],["02","Crie suas cobranças","Registre valores, vencimentos e acompanhe cada cobrança."],["03","Acompanhe o financeiro","Use o dashboard e os relatórios para entender sua operação."]].map(([n,t,d])=><div key={n} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div className="text-4xl font-black text-emerald-100">{n}</div><h3 className="mt-4 text-xl font-extrabold">{t}</h3><p className="mt-2 leading-7 text-slate-500">{d}</p></div>)}
+            {[["01","Cadastre seus clientes","Tenha os contatos e informações da sua carteira organizados."],["02","Crie suas cobranças","Registre valores, vencimentos e acompanhe cada cobrança."],["03","Acompanhe o financeiro","Use o dashboard e os relatórios para entender sua operação."]].map(([n,t,d])=><div key={n} className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"><div className="text-4xl font-black text-blue-100">{n}</div><h3 className="mt-4 text-xl font-extrabold">{t}</h3><p className="mt-2 leading-7 text-slate-500">{d}</p></div>)}
           </div>
         </div>
       </section>
@@ -140,16 +140,16 @@ export default function Home() {
       <section id="planos" className="bg-slate-50">
         <div className="mx-auto max-w-7xl px-5 py-20 sm:py-24">
           <div className="text-center">
-            <p className="text-sm font-extrabold uppercase tracking-widest text-emerald-600">Planos</p>
+            <p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">Planos</p>
             <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Escolha o plano ideal para sua operação.</h2>
             <p className="mx-auto mt-4 max-w-2xl text-slate-600">Comece com 3 dias de teste e evolua conforme sua carteira de clientes e sua equipe crescerem.</p>
           </div>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
             {plans.map((plan) => (
-              <div key={plan.name} className={plan.featured ? "relative flex flex-col rounded-3xl border-2 border-emerald-600 bg-white p-6 shadow-2xl shadow-emerald-100" : "relative flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"}>
+              <div key={plan.name} className={plan.featured ? "relative flex flex-col rounded-3xl border-2 border-blue-600 bg-white p-6 shadow-2xl shadow-blue-100" : "relative flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"}>
                 {plan.badge && (
-                  <div className={plan.featured ? "absolute -top-3 left-5 rounded-full bg-emerald-600 px-3 py-1 text-xs font-black text-white" : "absolute -top-3 left-5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700"}>
+                  <div className={plan.featured ? "absolute -top-3 left-5 rounded-full bg-blue-600 px-3 py-1 text-xs font-black text-white" : "absolute -top-3 left-5 rounded-full bg-blue-50 px-3 py-1 text-xs font-black text-blue-700"}>
                     {plan.badge}
                   </div>
                 )}
@@ -164,13 +164,13 @@ export default function Home() {
                     <><span className="text-4xl font-black text-slate-950">R$ {plan.price}</span><span className="text-sm text-slate-500">{plan.period}</span></>
                   )}
                 </div>
-                <Link href="/cadastro" className={plan.featured ? "mt-6 flex justify-center rounded-xl bg-emerald-600 px-4 py-3 font-extrabold text-white hover:bg-emerald-700" : "mt-6 flex justify-center rounded-xl border border-slate-200 px-4 py-3 font-extrabold text-slate-800 hover:bg-slate-50"}>
+                <Link href="/cadastro" className={plan.featured ? "mt-6 flex justify-center rounded-xl bg-blue-600 px-4 py-3 font-extrabold text-white hover:bg-blue-700" : "mt-6 flex justify-center rounded-xl border border-slate-200 px-4 py-3 font-extrabold text-slate-800 hover:bg-slate-50"}>
                   {plan.name === "Teste Grátis" ? "Começar teste" : "Começar agora"}
                 </Link>
                 <ul className="mt-6 space-y-3">
                   {plan.items.map((item) => (
                     <li key={item} className="flex gap-2 text-sm leading-5 text-slate-600">
-                      <Check size={17} className="mt-0.5 shrink-0 text-emerald-500" />
+                      <Check size={17} className="mt-0.5 shrink-0 text-blue-500" />
                       {item}
                     </li>
                   ))}
@@ -179,7 +179,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-emerald-100 bg-white p-5 text-center shadow-sm">
+          <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-blue-100 bg-white p-5 text-center shadow-sm">
             <p className="font-bold text-slate-800">Período de teste: 3 dias</p>
             <p className="mt-1 text-sm leading-6 text-slate-500">Durante o teste, a conta fica limitada a 1 cliente e 1 número de WhatsApp. Após o período, o acesso aguarda a ativação de um plano.</p>
           </div>
@@ -187,12 +187,12 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 pb-20">
-        <div className="rounded-[2rem] bg-gradient-to-br from-emerald-900 via-emerald-700 to-lime-600 p-8 text-white shadow-2xl shadow-emerald-900/25 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-emerald-100">Comece sua estrutura no CloudZap e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-emerald-800 shadow-lg">Criar minha conta <ArrowRight size={18}/></Link></div></div>
+        <div className="rounded-[2rem] bg-gradient-to-br from-blue-900 via-blue-700 to-blue-600 p-8 text-white shadow-2xl shadow-blue-900/25 sm:p-12"><div className="max-w-2xl"><ShieldCheck size={28}/><h2 className="mt-5 text-3xl font-black sm:text-4xl">Mais organização para sua cobrança. Mais clareza para sua gestão.</h2><p className="mt-4 leading-7 text-blue-100">Comece sua estrutura no CloudZap e evolua sua operação conforme sua necessidade.</p><Link href="/cadastro" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-extrabold text-blue-800 shadow-lg">Criar minha conta <ArrowRight size={18}/></Link></div></div>
       </section>
 
       <section id="faq" className="border-t border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-4xl px-5 py-20">
-          <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-emerald-600">FAQ</p><h2 className="mt-3 text-3xl font-black">Perguntas frequentes</h2></div>
+          <div className="text-center"><p className="text-sm font-extrabold uppercase tracking-widest text-blue-600">FAQ</p><h2 className="mt-3 text-3xl font-black">Perguntas frequentes</h2></div>
           <div className="mt-10 space-y-3">
             {[["Preciso instalar alguma coisa?","Não. O CloudZap foi pensado para acesso online, pelo navegador."],["Posso começar com poucos clientes?","Sim. A estrutura foi desenhada para acompanhar operações de diferentes tamanhos."],["O sistema trabalha com cobranças recorrentes?","Sim. Existe uma área própria para organizar recorrências e acompanhar seus ciclos."],["Posso testar antes de contratar um plano?","O cadastro inicial permite entrar na plataforma e conhecer a experiência. As condições comerciais podem ser ajustadas antes da cobrança dos planos."]].map(([q,a])=><details key={q} className="group rounded-2xl border border-slate-200 bg-white p-5"><summary className="cursor-pointer list-none font-extrabold text-slate-800">{q}</summary><p className="mt-3 pr-6 text-sm leading-6 text-slate-500">{a}</p></details>)}
           </div>
@@ -200,7 +200,7 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} CloudZap. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-emerald-600">Acessar plataforma →</Link></div>
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-10 sm:flex-row sm:items-center sm:justify-between"><Logo/><div className="text-sm text-slate-500">© {new Date().getFullYear()} CloudZap. Gestão de cobranças e financeiro.</div><Link href="/login" className="font-bold text-blue-600">Acessar plataforma →</Link></div>
       </footer>
     
 </main>
