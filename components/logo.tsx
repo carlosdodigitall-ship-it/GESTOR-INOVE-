@@ -4,7 +4,7 @@ export function Logo(){return <div className="flex items-center gap-2.5">
     <svg viewBox="0 0 128 128" className="relative h-11 w-11" aria-hidden="true">
       <defs>
         <linearGradient id="lc" x1="22" y1="30" x2="104" y2="94" gradientUnits="userSpaceOnUse"><stop stopColor="#eff6ff"/><stop offset=".45" stopColor="#bfdbfe"/><stop offset="1" stopColor="#60a5fa"/></linearGradient>
-        <linearGradient id="lb" x1="77" y1="40" x2="45" y2="99" gradientUnits="userSpaceOnUse"><stop stopColor="#93c5fd"/><stop offset=".45" stopColor="#84CC16"/><stop offset="1" stopColor="#2563eb"/></linearGradient>
+        <linearGradient id="lb" x1="77" y1="40" x2="45" y2="99" gradientUnits="userSpaceOnUse"><stop stopColor="#93c5fd"/><stop offset=".45" stopColor="#3b82f6"/><stop offset="1" stopColor="#2563eb"/></linearGradient>
         <filter id="ls" x="10" y="18" width="108" height="94" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="7" stdDeviation="5" floodColor="#0f172a" floodOpacity=".3"/></filter>
       </defs>
       <g filter="url(#ls)">
