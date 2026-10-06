@@ -12,6 +12,13 @@ const supabasePublishableKey =
 
 export async function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
+
+  // O login deve sempre abrir, mesmo com uma sessão antiga e conta vencida.
+  // O bloqueio só é verificado depois que o usuário tenta acessar uma rota protegida.
+  if (path === "/login") {
+    return NextResponse.next();
+  }
+
   const protectedRoute =
     path.startsWith("/admin") ||
     path.startsWith("/dashboard") ||
@@ -83,14 +90,6 @@ export async function proxy(request: NextRequest) {
         return NextResponse.redirect(url);
       }
     }
-  }
-
-  if (path === "/login" && data?.claims) {
-    const url = request.nextUrl.clone();
-    const next = url.searchParams.get("next");
-    url.pathname = next && next.startsWith("/") ? next : "/dashboard";
-    url.searchParams.delete("next");
-    return NextResponse.redirect(url);
   }
 
   return response;
