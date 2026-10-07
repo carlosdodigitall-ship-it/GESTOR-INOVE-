@@ -3,11 +3,11 @@
 import Link from "next/link";
 import {usePathname,useRouter} from "next/navigation";
 import {useState,useEffect} from "react";
-import {LayoutDashboard,Users,ReceiptText,Repeat2,WalletCards,X,Tag,Layers3,LogOut,ChevronRight,PlugZap,ShieldCheck,BarChart3} from "lucide-react";
+import {LayoutDashboard,Users,ReceiptText,Repeat2,WalletCards,X,Tag,Layers3,LogOut,ChevronRight,PlugZap,ShieldCheck,BarChart3,MessageCircle} from "lucide-react";
 import {Logo} from "./logo";
 import {createClient} from "@/lib/supabase/client";
 
-const billing=[["Dashboard","/dashboard",LayoutDashboard],["Clientes","/clientes",Users],["Planos","/planos",Layers3],["Categorias","/categorias",Tag],["Cobranças","/cobrancas",ReceiptText],["Recorrências","/recorrencias",Repeat2],["Financeiro","/financeiro",WalletCards],["Integrações","/integracoes",PlugZap],["Relatórios","/relatorios",BarChart3]] as const;
+const billing=[["Dashboard","/dashboard",LayoutDashboard],["Clientes","/clientes",Users],["Planos","/planos",Layers3],["Categorias","/categorias",Tag],["Cobranças","/cobrancas",ReceiptText],["Recorrências","/recorrencias",Repeat2],["Financeiro","/financeiro",WalletCards],["Integrações","/integracoes",PlugZap],["WhatsApp","/whatsapp",MessageCircle],["Relatórios","/relatorios",BarChart3]] as const;
 
 function MenuGroup({title,items,path,onClose}:{title:string;items:readonly (readonly [string,string,any])[];path:string;onClose:()=>void}){return <section className="mb-6"><div className="px-4 pb-2 text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">{title}</div><div className="space-y-1">{items.map(([label,href,Icon])=><Link key={href} href={href} onClick={onClose} className={"group flex min-h-[48px] items-center gap-3 rounded-xl px-4 text-[15px] font-semibold transition "+(path===href||path.startsWith(href+"/")?"bg-blue-50 text-blue-700 shadow-sm":"text-slate-600 hover:bg-slate-50 hover:text-slate-950")}><span className={"grid h-9 w-9 shrink-0 place-items-center rounded-lg transition "+(path===href||path.startsWith(href+"/")?"bg-blue-100 text-blue-700":"bg-slate-50 text-slate-500 group-hover:bg-slate-100 group-hover:text-slate-700")}><Icon size={19} strokeWidth={2.1}/></span><span className="flex-1">{label}</span>{(path===href||path.startsWith(href+"/"))&&<ChevronRight size={16}/>}</Link>)}</div></section>}
 
