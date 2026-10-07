@@ -42,6 +42,11 @@ export async function POST(){
       row=created;
     }
 
+    const appUrl=process.env.NEXT_PUBLIC_APP_URL||process.env.APP_URL||"";
+    if(appUrl){
+      try{await papi.configureWebhook(row.instance_id,`${appUrl.replace(/\/$/,"")}/api/whatsapp/webhook`);}catch{}
+    }
+
     const remote=await papi.getStatus(row.instance_id);
     const status=remoteStatus(remote);
 
