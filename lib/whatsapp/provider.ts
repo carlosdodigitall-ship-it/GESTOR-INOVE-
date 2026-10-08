@@ -23,7 +23,7 @@ export class ZapiProvider implements WhatsAppProvider {
   private readonly clientToken: string;
 
   constructor() {
-    this.baseUrl = (process.env.ZAPI_BASE_URL || "https://api.z-api.io").replace(/\\/$/, "");
+    this.baseUrl = (process.env.ZAPI_BASE_URL || "https://api.z-api.io").replace(/\/$/, "");
     this.instanceId = process.env.ZAPI_INSTANCE_ID || "";
     this.token = process.env.ZAPI_TOKEN || "";
     this.clientToken = process.env.ZAPI_CLIENT_TOKEN || "";
