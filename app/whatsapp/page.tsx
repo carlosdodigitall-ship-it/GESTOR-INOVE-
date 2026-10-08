@@ -55,7 +55,7 @@ export default function WhatsAppPage(){
       setStatus(d.status||"connecting");
       if(d.qr)setQr(d.qr);
       if(d.connected)setQr("");
-      setMessage(d.connected?"WhatsApp já está conectado.":"QR Code real da P-API carregado. Escaneie com o WhatsApp.");
+      setMessage(d.connected?"WhatsApp já está conectado.":"QR Code real da Z-API carregado. Escaneie com o WhatsApp.");
     }catch(e:any){setMessage(e.message||"Falha ao conectar.");}
     finally{setLoading(false);}
   }
@@ -86,7 +86,7 @@ export default function WhatsAppPage(){
       <div className="rounded-3xl bg-gradient-to-br from-blue-950 via-blue-800 to-blue-500 p-7 text-white shadow-xl">
         <div className="flex items-center gap-4">
           <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/10"><MessageCircle size={28}/></div>
-          <div><h1 className="text-2xl font-black">Conectar WhatsApp</h1><p className="mt-1 text-sm text-blue-100">Conexão real através da P-API.</p></div>
+          <div><h1 className="text-2xl font-black">Conectar WhatsApp</h1><p className="mt-1 text-sm text-blue-100">Conexão real através da Z-API.</p></div>
         </div>
       </div>
 
@@ -110,10 +110,10 @@ export default function WhatsAppPage(){
           <div className="mt-8 rounded-2xl bg-slate-50 p-6 text-sm text-slate-600">
             <p className="font-black text-slate-950">Como funciona</p>
             <ol className="mt-3 list-decimal space-y-2 pl-5">
-              <li>O CloudZap cria ou reutiliza sua instância na P-API.</li>
-              <li>O CloudZap busca o QR Code atual diretamente da P-API.</li>
+              <li>O CloudZap cria ou reutiliza sua instância na Z-API.</li>
+              <li>O CloudZap busca o QR Code atual diretamente da Z-API.</li>
               <li>Você escaneia esse QR no WhatsApp do celular.</li>
-              <li>A P-API confirma a autenticação.</li>
+              <li>A Z-API confirma a autenticação.</li>
               <li>Só depois o CloudZap mostra <strong>Conectado</strong>.</li>
             </ol>
           </div>
@@ -122,21 +122,21 @@ export default function WhatsAppPage(){
         <aside className="rounded-3xl border bg-white p-6 shadow-sm">
           <div className="flex items-center gap-2"><Wifi size={18} className="text-blue-700"/><h2 className="font-black">QR Code atual</h2></div>
           <div className="mt-5 grid min-h-[280px] place-items-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 p-4">
-            {connected?<p className="px-5 text-center text-sm font-bold text-blue-700">WhatsApp autenticado. O QR Code foi removido.</p>:qrImage?<img src={qrImage} alt="QR Code real da P-API" className="h-64 w-64 rounded-xl bg-white p-2"/>:<p className="px-5 text-center text-sm text-slate-400">Clique em conectar para obter o QR Code real da P-API.</p>}
+            {connected?<p className="px-5 text-center text-sm font-bold text-blue-700">WhatsApp autenticado. O QR Code foi removido.</p>:qrImage?<img src={qrImage} alt="QR Code real da Z-API" className="h-64 w-64 rounded-xl bg-white p-2"/>:<p className="px-5 text-center text-sm text-slate-400">Clique em conectar para obter o QR Code real da Z-API.</p>}
           </div>
         </aside>
       </div>
 
       <section className="rounded-3xl border bg-white p-6 shadow-sm">
         <div className="flex items-center gap-2"><Send size={18} className="text-blue-700"/><h2 className="font-black">Teste de envio</h2></div>
-        <p className="mt-1 text-sm text-slate-500">Disponível somente depois que a P-API confirmar a conexão.</p>
+        <p className="mt-1 text-sm text-slate-500">Disponível somente depois que a Z-API confirmar a conexão.</p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <input value={phone} onChange={e=>setPhone(e.target.value)} placeholder="5575999999999" className="flex-1 rounded-xl border px-4 py-3 outline-none focus:border-blue-500"/>
           <button onClick={test} disabled={testing||!phone||!connected} className="rounded-xl bg-slate-950 px-5 py-3 font-black text-white disabled:opacity-50">{testing?"Enviando...":"Enviar teste"}</button>
         </div>
       </section>
 
-      <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm text-blue-800"><strong>Conexão real:</strong> a chave da P-API permanece somente no servidor. O CloudZap não marca como conectado sem confirmação do status remoto.</div>
+      <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm text-blue-800"><strong>Conexão real:</strong> a chave da Z-API permanece somente no servidor. O CloudZap não marca como conectado sem confirmação do status remoto.</div>
     </div>
   </DashboardShell>
 }
