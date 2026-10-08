@@ -21,7 +21,7 @@ export async function GET(){
     if(!m)return NextResponse.json({connected:false,status:"disconnected"});
 
     const a=createAdminClient();
-    const {data:row}=await a.from("whatsapp_instances").select("*").eq("organization_id",m.organization_id).maybeSingle();
+    let {data:row}=await a.from("whatsapp_instances").select("*").eq("organization_id",m.organization_id).maybeSingle();
     if(!row){
       const instanceId=process.env.ZAPI_INSTANCE_ID || `cloudzap_${m.organization_id.replace(/-/g,"").slice(0,16)}`;
       const {data:created,error:insertError}=await a.from("whatsapp_instances").insert({
