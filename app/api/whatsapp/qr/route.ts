@@ -6,7 +6,7 @@ import {PapiProvider} from "@/lib/whatsapp/provider";
 export const runtime="nodejs";
 
 function qrValue(data:any){
-  return data?.qr ?? data?.qrcode ?? data?.qrCode ?? data?.data?.qr ?? data?.data?.qrcode ?? data?.data?.qrCode ?? null;
+  return data?.qr ?? data?.qrcode ?? data?.qrCode ?? data?.data?.qr ?? data?.data?.qrcode ?? data?.data?.qrCode ?? (typeof data?.data === "string" ? data.data : null) ?? (typeof data === "string" ? data : null);
 }
 
 export async function GET(){
