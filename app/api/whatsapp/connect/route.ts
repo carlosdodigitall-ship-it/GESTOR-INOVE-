@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 import {createClient} from "@/lib/supabase/server";
 import {createAdminClient} from "@/lib/supabase/admin";
-import {PapiProvider} from "@/lib/whatsapp/provider";
+import {getWhatsAppProvider} from "@/lib/whatsapp";
 
 export const runtime="nodejs";
 
@@ -27,7 +27,7 @@ export async function POST(){
 
     const admin=createAdminClient();
     let {data:row}=await admin.from("whatsapp_instances").select("*").eq("organization_id",member.organization_id).maybeSingle();
-    const papi=new PapiProvider();
+    const papi=getWhatsAppProvider();
 
     if(!row){
       const instanceId=`cloudzap_${member.organization_id.replace(/-/g,"").slice(0,16)}`;
@@ -36,7 +36,7 @@ export async function POST(){
         if(!/already|exist|duplicate|409|conflict/i.test(message)) throw error;
       }
       const {data:created,error}=await admin.from("whatsapp_instances").insert({
-        organization_id:member.organization_id,provider:"papi",instance_id:instanceId,status:"connecting"
+        organization_id:member.organization_id,provider:process.env.WHATSAPP_PROVIDER || "zapi",instance_id:instanceId,status:"connecting"
       }).select("*").single();
       if(error)throw error;
       row=created;
