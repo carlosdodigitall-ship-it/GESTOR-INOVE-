@@ -30,7 +30,7 @@ export async function POST(){
     const papi=getWhatsAppProvider();
 
     if(!row){
-      const instanceId=`cloudzap_${member.organization_id.replace(/-/g,"").slice(0,16)}`;
+      const instanceId=process.env.ZAPI_INSTANCE_ID || `cloudzap_${member.organization_id.replace(/-/g,"").slice(0,16)}`;
       try{await papi.createInstance(instanceId);}catch(error:any){
         const message=String(error?.message||"");
         if(!/already|exist|duplicate|409|conflict/i.test(message)) throw error;
