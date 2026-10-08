@@ -2,8 +2,33 @@
   "name": "gestor-zap-v2",
   "version": "0.1.0",
   "private": true,
-  "scripts": {"dev":"next dev","build":"next build","start":"next start","lint":"eslint ."},
-  "dependencies": {"@supabase/ssr":"latest","@supabase/supabase-js":"latest","lucide-react":"latest","next":"16.3.8","react":"latest","react-dom":"latest"},
-  "devDependencies": {"@tailwindcss/postcss":"latest","@types/node":"latest","@types/react":"latest","@types/react-dom":"latest","eslint":"latest","eslint-config-next":"latest","tailwindcss":"latest","typescript":"latest"},
-  "engines": {"node":">=20.9.0 <25"}
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@supabase/ssr": "latest",
+    "@supabase/supabase-js": "latest",
+    "lucide-react": "latest",
+    "next": "16.3.8",
+    "react": "latest",
+    "react-dom": "latest",
+    "qrcode": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest",
+    "@types/qrcode": "latest"
+  },
+  "engines": {
+    "node": ">=20.9.0 <25"
+  }
 }
