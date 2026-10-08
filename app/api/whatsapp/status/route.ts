@@ -1,7 +1,7 @@
 import {NextResponse} from "next/server";
 import {createClient} from "@/lib/supabase/server";
 import {createAdminClient} from "@/lib/supabase/admin";
-import {PapiProvider} from "@/lib/whatsapp/provider";
+import {getWhatsAppProvider} from "@/lib/whatsapp";
 
 export const runtime="nodejs";
 
@@ -24,7 +24,7 @@ export async function GET(){
     const {data:row}=await a.from("whatsapp_instances").select("*").eq("organization_id",m.organization_id).maybeSingle();
     if(!row)return NextResponse.json({connected:false,status:"disconnected"});
 
-    const remote=await new PapiProvider().getStatus(row.instance_id);
+    const remote=await getWhatsAppProvider().getStatus(row.instance_id);
     const status=normalizeStatus(remote);
 
     await a.from("whatsapp_instances").update({
