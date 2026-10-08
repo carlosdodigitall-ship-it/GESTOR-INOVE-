@@ -22,7 +22,16 @@ export async function GET(){
 
     const a=createAdminClient();
     const {data:row}=await a.from("whatsapp_instances").select("*").eq("organization_id",m.organization_id).maybeSingle();
-    if(!row)return NextResponse.json({connected:false,status:"disconnected"});
+    if(!row){
+      const instanceId=process.env.ZAPI_INSTANCE_ID || `cloudzap_${m.organization_id.replace(/-/g,"").slice(0,16)}`;
+      const {data:created,error:insertError}=await a.from("whatsapp_instances").insert({
+        organization_id:m.organization_id,
+        instance_id:instanceId,
+        status:"connecting"
+      }).select("*").single();
+      if(insertError) throw insertError;
+      row=created;
+    }
 
     const remote=await getWhatsAppProvider().getStatus(row.instance_id);
     const status=normalizeStatus(remote);
