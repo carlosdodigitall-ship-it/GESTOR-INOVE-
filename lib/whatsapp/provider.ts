@@ -13,7 +13,7 @@ export interface WhatsAppProvider {
 }
 
 function normalizePhone(phone: string): string {
-  return phone.replace(/\\D/g, "");
+  return phone.replace(/\D/g, "");
 }
 
 export class ZapiProvider implements WhatsAppProvider {
@@ -162,7 +162,7 @@ export class PapiProvider implements WhatsAppProvider {
     input: WhatsAppSendInput,
     instanceId: string,
   ): Promise<{ success: boolean; messageId?: string }> {
-    const digits = input.to.replace(/\\D/g, "");
+    const digits = input.to.replace(/\D/g, "");
     const body = await this.request(`/api/instances/${encodeURIComponent(instanceId)}/send-text`, {
       method: "POST",
       body: JSON.stringify({ jid: `${digits}@s.whatsapp.net`, text: input.message }),
