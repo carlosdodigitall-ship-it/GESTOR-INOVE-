@@ -113,7 +113,7 @@ export class PapiProvider implements WhatsAppProvider {
       throw new Error("PAPI_API_KEY não configurada no servidor.");
     }
 
-    const response = await fetch(this.baseUrl.replace(/\\/$/, "") + path, {
+    const response = await fetch(this.baseUrl.replace(/\/$/, "") + path, {
       ...init,
       headers: {
         "Content-Type": "application/json",
