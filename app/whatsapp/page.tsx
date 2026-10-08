@@ -1,23 +1,33 @@
 "use client";
 import {useEffect,useState} from "react";
+import QRCode from "qrcode";
 import {DashboardShell} from "@/components/dashboard-shell";
 import {Loader2,MessageCircle,RefreshCw,Send,Unplug,Wifi} from "lucide-react";
-
-function qrSrc(value:string){
-  if(value.startsWith("data:image/")||value.startsWith("data:image/svg+xml"))return value;
-  if(value.trim().startsWith("<svg"))return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(value)}`;
-  if(/^[A-Za-z0-9+/=\s]+$/.test(value)&&value.replace(/\s/g,"").length>100)return `data:image/png;base64,${value.replace(/\s/g,"")}`;
-  return value;
-}
 
 export default function WhatsAppPage(){
   const [status,setStatus]=useState("disconnected");
   const [qr,setQr]=useState("");
+  const [qrImage,setQrImage]=useState("");
   const [loading,setLoading]=useState(false);
   const [message,setMessage]=useState("");
   const [phone,setPhone]=useState("");
   const [testing,setTesting]=useState(false);
   const connected=["connected","open","online","ready","authenticated"].includes(status.trim().toLowerCase());
+
+  useEffect(()=>{
+    let active=true;
+    async function renderQr(){
+      if(!qr){setQrImage("");return;}
+      if(qr.startsWith("data:image/")||qr.startsWith("http://")||qr.startsWith("https://")){setQrImage(qr);return;}
+      if(qr.trim().startsWith("<svg")){setQrImage(`data:image/svg+xml;charset=utf-8,${encodeURIComponent(qr)}`);return;}
+      try{
+        const dataUrl=await QRCode.toDataURL(qr,{width:512,margin:2,errorCorrectionLevel:"M"});
+        if(active)setQrImage(dataUrl);
+      }catch{if(active)setQrImage("");}
+    }
+    renderQr();
+    return()=>{active=false;};
+  },[qr]);
 
   async function loadStatus(){
     const r=await fetch("/api/whatsapp/status",{cache:"no-store"});
@@ -112,7 +122,7 @@ export default function WhatsAppPage(){
         <aside className="rounded-3xl border bg-white p-6 shadow-sm">
           <div className="flex items-center gap-2"><Wifi size={18} className="text-blue-700"/><h2 className="font-black">QR Code atual</h2></div>
           <div className="mt-5 grid min-h-[280px] place-items-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 p-4">
-            {connected?<p className="px-5 text-center text-sm font-bold text-blue-700">WhatsApp autenticado. O QR Code foi removido.</p>:qr?<img src={qrSrc(qr)} alt="QR Code real da P-API" className="h-64 w-64 rounded-xl bg-white p-2"/>:<p className="px-5 text-center text-sm text-slate-400">Clique em conectar para obter o QR Code real da P-API.</p>}
+            {connected?<p className="px-5 text-center text-sm font-bold text-blue-700">WhatsApp autenticado. O QR Code foi removido.</p>:qrImage?<img src={qrImage} alt="QR Code real da P-API" className="h-64 w-64 rounded-xl bg-white p-2"/>:<p className="px-5 text-center text-sm text-slate-400">Clique em conectar para obter o QR Code real da P-API.</p>}
           </div>
         </aside>
       </div>
