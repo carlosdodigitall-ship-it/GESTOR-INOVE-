@@ -25,6 +25,7 @@ export async function GET(){
       const instanceId=process.env.ZAPI_INSTANCE_ID || `cloudzap_${m.organization_id.replace(/-/g,"").slice(0,16)}`;
       const {data:created,error:insertError}=await a.from("whatsapp_instances").insert({
         organization_id:m.organization_id,
+        name:"WhatsApp CloudZap",
         instance_id:instanceId,
         status:"connecting"
       }).select("*").single();
