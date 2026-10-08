@@ -36,7 +36,7 @@ export async function POST(){
         if(!/already|exist|duplicate|409|conflict/i.test(message)) throw error;
       }
       const {data:created,error}=await admin.from("whatsapp_instances").insert({
-        organization_id:member.organization_id,instance_id:instanceId,status:"connecting"
+        organization_id:member.organization_id,name:"WhatsApp CloudZap",instance_id:instanceId,status:"connecting"
       }).select("*").single();
       if(error)throw error;
       row=created;
