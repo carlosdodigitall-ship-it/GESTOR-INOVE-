@@ -43,6 +43,7 @@ export default function WhatsAppPage(){
     const r=await fetch("/api/whatsapp/qr",{cache:"no-store"});
     const d=await r.json().catch(()=>({}));
     if(r.ok&&d.qr){setQr(d.qr);setStatus("waiting_qr");}
+    else if(d.connected){setStatus("connected");setQr("");}
     else if(r.status!==202&&d.error)setMessage(d.error);
   }
 
@@ -76,10 +77,10 @@ export default function WhatsAppPage(){
 
   useEffect(()=>{
     loadStatus();
-    const statusTimer=setInterval(loadStatus,5000);
-    const qrTimer=setInterval(loadQr,5000);
-    return()=>{clearInterval(statusTimer);clearInterval(qrTimer)};
-  },[connected]);
+    loadQr();
+    const statusTimer=setInterval(loadStatus,4000);
+    return()=>{clearInterval(statusTimer)};
+  },[]);
 
   return <DashboardShell title="WhatsApp">
     <div className="mx-auto max-w-5xl space-y-6">

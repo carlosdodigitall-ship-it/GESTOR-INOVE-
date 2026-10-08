@@ -59,7 +59,11 @@ export class ZapiProvider implements WhatsAppProvider {
   }
 
   async getQr(_instanceId: string): Promise<any> {
-    return this.request("/qr-code");
+    try {
+      return await this.request("/qr-code/image");
+    } catch {
+      return this.request("/qr-code");
+    }
   }
 
   async getStatus(_instanceId: string): Promise<any> {

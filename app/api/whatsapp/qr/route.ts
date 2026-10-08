@@ -6,7 +6,7 @@ import {getWhatsAppProvider} from "@/lib/whatsapp";
 export const runtime="nodejs";
 
 function qrValue(data:any){
-  return data?.qr ?? data?.qrcode ?? data?.qrCode ?? data?.data?.qr ?? data?.data?.qrcode ?? data?.data?.qrCode ?? (typeof data?.data === "string" ? data.data : null) ?? (typeof data === "string" ? data : null);
+  return data?.value ?? data?.qr ?? data?.qrcode ?? data?.qrCode ?? data?.data?.value ?? data?.data?.qr ?? data?.data?.qrcode ?? data?.data?.qrCode ?? (typeof data?.data === "string" ? data.data : null) ?? (typeof data === "string" ? data : null);
 }
 
 export async function GET(){
@@ -23,9 +23,10 @@ export async function GET(){
     const papi=getWhatsAppProvider();
     if(!row){
       const instanceId=process.env.ZAPI_INSTANCE_ID || `cloudzap_${m.organization_id.replace(/-/g,"").slice(0,16)}`;
+      const provider=(process.env.WHATSAPP_PROVIDER || "zapi").trim().toLowerCase();
       const {data:created,error:insertError}=await a.from("whatsapp_instances").insert({
         organization_id:m.organization_id,
-        name:"WhatsApp CloudZap",
+        provider,
         instance_id:instanceId,
         status:"connecting"
       }).select("*").single();

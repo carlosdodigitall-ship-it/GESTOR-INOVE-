@@ -13,7 +13,7 @@ function remoteStatus(data:any){
 }
 
 function qrValue(data:any){
-  return data?.qr ?? data?.qrcode ?? data?.qrCode ?? data?.data?.qr ?? data?.data?.qrcode ?? data?.data?.qrCode ?? (typeof data?.data === "string" ? data.data : null) ?? (typeof data === "string" ? data : null);
+  return data?.value ?? data?.qr ?? data?.qrcode ?? data?.qrCode ?? data?.data?.value ?? data?.data?.qr ?? data?.data?.qrcode ?? data?.data?.qrCode ?? (typeof data?.data === "string" ? data.data : null) ?? (typeof data === "string" ? data : null);
 }
 
 export async function POST(){
@@ -35,8 +35,12 @@ export async function POST(){
         const message=String(error?.message||"");
         if(!/already|exist|duplicate|409|conflict/i.test(message)) throw error;
       }
+      const provider=(process.env.WHATSAPP_PROVIDER || "zapi").trim().toLowerCase();
       const {data:created,error}=await admin.from("whatsapp_instances").insert({
-        organization_id:member.organization_id,name:"WhatsApp CloudZap",instance_id:instanceId,status:"connecting"
+        organization_id:member.organization_id,
+        provider,
+        instance_id:instanceId,
+        status:"connecting"
       }).select("*").single();
       if(error)throw error;
       row=created;
