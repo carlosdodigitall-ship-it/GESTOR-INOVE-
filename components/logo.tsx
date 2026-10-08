@@ -1,11 +1,11 @@
-export function Logo() {
+export function Logo({ dark = false }: { dark?: boolean } = {}) {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="relative grid h-11 w-11 shrink-0 place-items-center">
-        <div className="absolute inset-0 rounded-2xl bg-blue-400/25 blur-md" />
+      <div className="relative grid h-10 w-10 shrink-0 place-items-center">
+        <div className="absolute inset-0 rounded-2xl bg-blue-500/25 blur-md" />
         <svg
           viewBox="0 0 128 128"
-          className="relative h-11 w-11"
+          className="relative h-10 w-10"
           aria-hidden="true"
         >
           <defs>
@@ -77,8 +77,8 @@ export function Logo() {
       </div>
 
       <div>
-        <div className="text-lg font-black tracking-tight text-slate-950">
-          Cloud<span className="text-blue-600">Zap</span>
+        <div className={`text-lg font-black tracking-tight ${dark ? "text-white" : "text-slate-950"}`}>
+          Cloud<span className="text-blue-500">Zap</span>
         </div>
         <div className="text-[9px] font-semibold uppercase tracking-widest text-slate-400">
           CRM · Cobranças · Automação
