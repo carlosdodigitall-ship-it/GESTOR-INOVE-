@@ -35,7 +35,7 @@ export default function Cadastro() {
   const field="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100";
   return <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,_#bfdbfe,_transparent_32%),linear-gradient(135deg,#eff6ff_0%,#ffffff_55%,#f8fafc_100%)] px-4 py-8 md:px-8">
     <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-8 lg:grid-cols-[.9fr_1.1fr]">
-      <section className="hidden rounded-[2.5rem] bg-gradient-to-br from-[#022c22] via-[#1d4ed8] to-[#3b82f6] p-10 text-white shadow-2xl shadow-blue-900/15 lg:block">
+      <section className="hidden rounded-[2.5rem] bg-gradient-to-br from-[#1e3a8a] via-[#1d4ed8] to-[#3b82f6] p-10 text-white shadow-2xl shadow-blue-900/15 lg:block">
         <Logo/>
         <div className="mt-20"><span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold"><Sparkles size={16}/> Comece sua organização</span>
         <h2 className="mt-6 text-5xl font-black leading-tight tracking-tight">Seu negócio mais organizado começa aqui.</h2>
