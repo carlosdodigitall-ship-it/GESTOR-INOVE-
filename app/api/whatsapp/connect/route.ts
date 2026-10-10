@@ -37,6 +37,7 @@ export async function POST(){
       }
       const provider=(process.env.WHATSAPP_PROVIDER || "zapi").trim().toLowerCase();
       const {data:created,error}=await admin.from("whatsapp_instances").insert({
+        name: "WhatsApp Principal",
         organization_id:member.organization_id,
         provider,
         instance_id:instanceId,
