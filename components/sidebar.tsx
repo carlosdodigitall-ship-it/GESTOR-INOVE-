@@ -48,39 +48,31 @@ interface NavSection {
 
 const navSections: NavSection[] = [
   {
-    title: "Principal",
+    title: "CRM",
     items: [
-      {
-        key: "dashboard",
-        label: "Dashboard",
-        href: "/dashboard",
-        icon: LayoutDashboard,
-      },
-      {
-        key: "clientes",
-        label: "Clientes",
-        href: "/clientes",
-        icon: Users,
-      },
+      { key: "crm_dashboard", label: "Visão geral", href: "/dashboard", icon: LayoutDashboard },
+      { key: "clientes", label: "Contatos e clientes", href: "/clientes", icon: Users },
+      { key: "crm_funil", label: "Funil de vendas", href: "/crm/funil", icon: Layers3 },
+      { key: "crm_tarefas", label: "Tarefas e atividades", href: "/crm/tarefas", icon: Tag },
     ],
   },
   {
-    title: "Financeiro & Vendas",
+    title: "Gestor de Cobranças",
     items: [
       {
         key: "financeiro_group",
-        label: "Cobranças & Caixa",
+        label: "Cobranças & Recebimentos",
         icon: ReceiptText,
         subItems: [
           { label: "Cobranças", href: "/cobrancas", icon: ReceiptText },
           { label: "Recorrências", href: "/recorrencias", icon: Repeat2 },
-          { label: "Fluxo Financeiro", href: "/financeiro", icon: WalletCards },
+          { label: "Fluxo financeiro", href: "/financeiro", icon: WalletCards },
           { label: "Relatórios", href: "/relatorios", icon: BarChart3 },
         ],
       },
       {
         key: "catalogo_group",
-        label: "Planos & Catálogo",
+        label: "Planos & Categorias",
         icon: Layers3,
         subItems: [
           { label: "Planos", href: "/planos", icon: Layers3 },
@@ -90,38 +82,17 @@ const navSections: NavSection[] = [
     ],
   },
   {
-    title: "Comunicação & Conexões",
+    title: "Comunicação & Integrações",
     items: [
-      {
-        key: "whatsapp",
-        label: "WhatsApp",
-        href: "/whatsapp",
-        icon: MessageCircle,
-        badge: "Z-API",
-      },
-      {
-        key: "integracoes",
-        label: "Integrações",
-        href: "/integracoes",
-        icon: PlugZap,
-      },
+      { key: "whatsapp", label: "WhatsApp", href: "/whatsapp", icon: MessageCircle, badge: (process.env.NEXT_PUBLIC_WHATSAPP_PROVIDER || "evolution").toUpperCase() },
+      { key: "integracoes", label: "Integrações", href: "/integracoes", icon: PlugZap },
     ],
   },
   {
     title: "Sistema & Suporte",
     items: [
-      {
-        key: "configuracoes",
-        label: "Configurações",
-        href: "/configuracoes",
-        icon: Settings,
-      },
-      {
-        key: "tutoriais",
-        label: "Tutoriais & Ajuda",
-        href: "/tutoriais",
-        icon: HelpCircle,
-      },
+      { key: "configuracoes", label: "Configurações", href: "/configuracoes", icon: Settings },
+      { key: "tutoriais", label: "Tutoriais & Ajuda", href: "/tutoriais", icon: HelpCircle },
     ],
   },
 ];
