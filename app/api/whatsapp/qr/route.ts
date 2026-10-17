@@ -31,18 +31,19 @@ export async function GET() {
       .eq("organization_id", m.organization_id)
       .maybeSingle();
 
+    const providerName = (process.env.WHATSAPP_PROVIDER || "evolution").trim().toLowerCase();
     const effectiveToken = row?.token || process.env.ZAPI_TOKEN || "";
-    const effectiveInstanceId = row?.instance_id || process.env.ZAPI_INSTANCE_ID || "";
+    const effectiveInstanceId = row?.instance_id || (providerName === "evolution" ? process.env.EVOLUTION_INSTANCE_NAME || "gestor-inove" : process.env.ZAPI_INSTANCE_ID || "");
 
-    if (!effectiveInstanceId || !effectiveToken) {
+    if (!effectiveInstanceId || (providerName !== "evolution" && !effectiveToken)) {
       return NextResponse.json({
-        error: "Z-API não configurada. Defina as credenciais para gerar o QR Code.",
+        error: providerName === "evolution" ? "Evolution API não configurada. Defina EVOLUTION_API_KEY na Vercel." : "Z-API não configurada. Defina as credenciais para gerar o QR Code.",
         status: "not_configured"
       }, { status: 400 });
     }
 
     if (!row) {
-      const provider = (process.env.WHATSAPP_PROVIDER || "zapi").trim().toLowerCase();
+      const provider = (process.env.WHATSAPP_PROVIDER || "evolution").trim().toLowerCase();
       const { data: created, error: insertError } = await a.from("whatsapp_instances").insert({
         name: "WhatsApp Principal",
         organization_id: m.organization_id,
