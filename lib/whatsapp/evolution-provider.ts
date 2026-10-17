@@ -66,8 +66,10 @@ export class EvolutionApiProvider implements WhatsAppProvider {
   }
 
   async getQr(instanceId?: string): Promise<any> {
-    const name = encodeURIComponent(instanceId || this.instanceName);
-    const result = await this.request(`/instance/connect/${name}`, { method: "GET" });
+    const name = instanceId || this.instanceName;
+    const current = await this.getStatus(name);
+    if (current.connected) return { ...current, connected: true, qr: null, status: "connected" };
+    const result = await this.request(`/instance/connect/${encodeURIComponent(name)}`, { method: "GET" });
     return {
       ...result,
       connected: false,
