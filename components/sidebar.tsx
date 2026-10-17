@@ -48,20 +48,22 @@ interface NavSection {
 
 const navSections: NavSection[] = [
   {
-    title: "CRM",
+    title: "Gestor de Cobrança",
     items: [
-      { key: "crm_dashboard", label: "Visão geral", href: "/dashboard", icon: LayoutDashboard },
-      { key: "clientes", label: "Contatos e clientes", href: "/clientes", icon: Users },
-      { key: "crm_funil", label: "Funil de vendas", href: "/crm/funil", icon: Layers3 },
-      { key: "crm_tarefas", label: "Tarefas e atividades", href: "/crm/tarefas", icon: Tag },
-    ],
-  },
-  {
-    title: "Gestor de Cobranças",
-    items: [
+      { key: "gestor_dashboard", label: "Visão geral", href: "/dashboard", icon: LayoutDashboard },
+      {
+        key: "cadastros_group",
+        label: "Cadastros",
+        icon: Users,
+        subItems: [
+          { label: "Clientes", href: "/clientes", icon: Users },
+          { label: "Planos e produtos", href: "/planos", icon: Layers3 },
+          { label: "Categorias", href: "/categorias", icon: Tag },
+        ],
+      },
       {
         key: "financeiro_group",
-        label: "Cobranças & Recebimentos",
+        label: "Cobranças e financeiro",
         icon: ReceiptText,
         subItems: [
           { label: "Cobranças", href: "/cobrancas", icon: ReceiptText },
@@ -71,28 +73,29 @@ const navSections: NavSection[] = [
         ],
       },
       {
-        key: "catalogo_group",
-        label: "Planos & Categorias",
-        icon: Layers3,
+        key: "integracoes_group",
+        label: "Canais e integrações",
+        icon: PlugZap,
         subItems: [
-          { label: "Planos", href: "/planos", icon: Layers3 },
-          { label: "Categorias", href: "/categorias", icon: Tag },
+          { label: "WhatsApp", href: "/whatsapp", icon: MessageCircle },
+          { label: "Integrações", href: "/integracoes", icon: PlugZap },
         ],
       },
     ],
   },
   {
-    title: "Comunicação & Integrações",
+    title: "CRM",
     items: [
-      { key: "whatsapp", label: "WhatsApp", href: "/whatsapp", icon: MessageCircle, badge: (process.env.NEXT_PUBLIC_WHATSAPP_PROVIDER || "evolution").toUpperCase() },
-      { key: "integracoes", label: "Integrações", href: "/integracoes", icon: PlugZap },
+      { key: "crm_dashboard", label: "Visão geral do CRM", href: "/crm", icon: LayoutDashboard },
+      { key: "crm_funil", label: "Funil de vendas", href: "/crm/funil", icon: Layers3 },
+      { key: "crm_tarefas", label: "Tarefas e atividades", href: "/crm/tarefas", icon: Tag },
     ],
   },
   {
-    title: "Sistema & Suporte",
+    title: "Sistema e suporte",
     items: [
       { key: "configuracoes", label: "Configurações", href: "/configuracoes", icon: Settings },
-      { key: "tutoriais", label: "Tutoriais & Ajuda", href: "/tutoriais", icon: HelpCircle },
+      { key: "tutoriais", label: "Tutoriais e ajuda", href: "/tutoriais", icon: HelpCircle },
     ],
   },
 ];
@@ -104,8 +107,9 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
   const [loading, setLoading] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({
+    cadastros_group: true,
     financeiro_group: true,
-    catalogo_group: false,
+    integracoes_group: false,
   });
 
   useEffect(() => {
@@ -173,7 +177,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         <nav className="flex-1 space-y-6 overflow-y-auto px-3.5 py-5 scrollbar-thin scrollbar-thumb-slate-800">
           {navSections.map((section) => (
             <div key={section.title} className="space-y-1.5">
-              <div className="px-3 pb-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
+              <div className="px-3 pb-2 text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-500">
                 {section.title}
               </div>
 
