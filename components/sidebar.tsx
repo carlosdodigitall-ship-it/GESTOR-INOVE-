@@ -86,7 +86,7 @@ const navSections: NavSection[] = [
   {
     title: "CRM",
     items: [
-      { key: "crm_dashboard", label: "Visão geral do CRM", href: "/crm", icon: LayoutDashboard },
+      { key: "crm_dashboard", label: "Visão geral do CRM", href: "/crm/funil", icon: LayoutDashboard },
       { key: "crm_funil", label: "Funil de vendas", href: "/crm/funil", icon: Layers3 },
       { key: "crm_tarefas", label: "Tarefas e atividades", href: "/crm/tarefas", icon: Tag },
     ],
