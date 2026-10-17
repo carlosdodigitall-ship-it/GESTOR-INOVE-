@@ -43,10 +43,10 @@ export async function POST(req: Request) {
       .eq("organization_id", member.organization_id)
       .maybeSingle();
 
-    const instanceId = customInstanceId || row?.instance_id || process.env.ZAPI_INSTANCE_ID || `cloudzap_${member.organization_id.replace(/-/g, "").slice(0, 16)}`;
+    const instanceId = customInstanceId || row?.instance_id || process.env.EVOLUTION_INSTANCE_NAME || `cloudzap_${member.organization_id.replace(/-/g, "").slice(0, 16)}`;
     const token = customToken || row?.token || process.env.ZAPI_TOKEN || "";
     const clientToken = customClientToken || row?.client_token || process.env.ZAPI_CLIENT_TOKEN || "";
-    const provider = (process.env.WHATSAPP_PROVIDER || "zapi").trim().toLowerCase();
+    const provider = (process.env.WHATSAPP_PROVIDER || "evolution").trim().toLowerCase();
 
     if (!row) {
       const { data: created, error } = await admin.from("whatsapp_instances").insert({
