@@ -64,7 +64,23 @@ create table if not exists public.plans(
   updated_at timestamptz not null default now()
 );
 
--- 6. CUSTOMERS (Clientes)
+-- 6. PRODUCTS (Catálogo de Produtos independente dos Planos)
+create table if not exists public.products(
+  id uuid primary key default gen_random_uuid(),
+  organization_id uuid not null references public.organizations(id) on delete cascade,
+  category_id uuid references public.plan_categories(id) on delete set null,
+  name text not null,
+  sku text,
+  description text,
+  price numeric(12,2) not null default 0 check(price>=0),
+  cost numeric(12,2) not null default 0 check(cost>=0),
+  status text not null default 'active' check(status in('active','inactive')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique(organization_id, sku)
+);
+
+-- 7. CUSTOMERS (Clientes)
 create table if not exists public.customers(
   id uuid primary key default gen_random_uuid(),
   organization_id uuid not null references public.organizations(id) on delete cascade,
@@ -219,6 +235,8 @@ create index if not exists idx_transactions_org on public.transactions(organizat
 create index if not exists idx_plan_categories_org on public.plan_categories(organization_id);
 create index if not exists idx_plans_org on public.plans(organization_id);
 create index if not exists idx_plans_category on public.plans(category_id);
+create index if not exists idx_products_org on public.products(organization_id);
+create index if not exists idx_products_category on public.products(category_id);
 create index if not exists idx_whatsapp_instances_org on public.whatsapp_instances(organization_id);
 
 -- ==============================================================================
@@ -293,6 +311,7 @@ alter table public.transactions enable row level security;
 alter table public.whatsapp_instances enable row level security;
 alter table public.plan_categories enable row level security;
 alter table public.plans enable row level security;
+alter table public.products enable row level security;
 alter table public.payment_integrations enable row level security;
 alter table public.payment_provider_tokens enable row level security;
 alter table public.oauth_states enable row level security;
@@ -335,6 +354,10 @@ create policy "plan categories org members" on public.plan_categories for all to
 -- Plans
 drop policy if exists "plans org members" on public.plans;
 create policy "plans org members" on public.plans for all to authenticated using(public.is_org_member(organization_id)) with check(public.is_org_member(organization_id));
+
+-- Products
+drop policy if exists "products org members" on public.products;
+create policy "products org members" on public.products for all to authenticated using(public.is_org_member(organization_id)) with check(public.is_org_member(organization_id));
 
 -- Payment Integrations
 drop policy if exists "payment integrations org members" on public.payment_integrations;
