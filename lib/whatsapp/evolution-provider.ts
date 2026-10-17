@@ -17,9 +17,9 @@ export class EvolutionApiProvider implements WhatsAppProvider {
   private readonly instanceName: string;
 
   constructor(config: EvolutionConfig = {}) {
-    this.baseUrl = (config.baseUrl || process.env.EVOLUTION_API_URL || "").replace(/\/$/, "");
+    this.baseUrl = (config.baseUrl || process.env.EVOLUTION_API_URL || "https://api.omensageiro.online").replace(/\/$/, "");
     this.apiKey = config.apiKey || process.env.EVOLUTION_API_KEY || "";
-    this.instanceName = config.instanceName || process.env.EVOLUTION_INSTANCE_NAME || "gestor-inove";
+    this.instanceName = config.instanceName || (config as any).instanceId || process.env.EVOLUTION_INSTANCE_NAME || "gestor-inove";
   }
 
   private async request(path: string, init: RequestInit = {}): Promise<any> {
