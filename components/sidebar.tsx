@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
+  Package,
   Users,
   ReceiptText,
   Repeat2,
@@ -57,7 +58,8 @@ const navSections: NavSection[] = [
         icon: Users,
         subItems: [
           { label: "Clientes", href: "/clientes", icon: Users },
-          { label: "Planos e produtos", href: "/planos", icon: Layers3 },
+          { label: "Planos", href: "/planos", icon: Layers3 },
+          { label: "Produtos", href: "/produtos", icon: Package },
           { label: "Categorias", href: "/categorias", icon: Tag },
         ],
       },
